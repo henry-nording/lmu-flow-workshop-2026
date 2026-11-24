@@ -55,6 +55,22 @@
     printButton.hidden = false;
     printButton.addEventListener('click', () => window.print());
   }
+  for (const link of document.querySelectorAll('a[data-set-download]')) {
+    link.addEventListener('click', event => {
+      if (event.defaultPrevented || event.button !== 0 ||
+          event.ctrlKey || event.metaKey || event.shiftKey || event.altKey) return;
+
+      // Give the download its own navigation so opening the instructions cannot cancel it.
+      const download = document.createElement('a');
+      download.href = link.dataset.setDownload;
+      download.target = '_blank';
+      download.rel = 'noopener';
+      download.download = '';
+      document.body.append(download);
+      download.click();
+      download.remove();
+    });
+  }
   addEventListener('pageshow', () => show(readVersion()));
   show(readVersion());
 })();
