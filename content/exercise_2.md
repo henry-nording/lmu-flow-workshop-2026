@@ -29,7 +29,7 @@ Use the per-sample statistics of the MAIT cluster; Charts, main factor `GroupID`
    Then test as in exercise 1: all four of one group above all four of the other gives p = 0.029.
 
 6. **Run FlowSOM a second time with a different seed.** Cluster numbers and colours change. Does the MAIT cluster and its group difference stay?
-7. **Other differences?** Compare the other clusters between the groups. Anything you find here is a hypothesis, not a result: you tested twelve clusters, and with four against four samples no finding survives a correction for multiple testing (FDR).
+7. **Other differences?** Compare the other clusters between the groups. Anything you find here is a hypothesis, not a result: you tested twelve clusters. With a rank test and four against four samples, no finding survives a correction for multiple testing (FDR). And a correction removes chance findings, not artefacts.
 8. **Cross-check.** Repeat steps 2 to 5 with the file without measurement-day alignment and colour the map by `BatchDay`. What changes, and what does not?
 
 ## If you have time
