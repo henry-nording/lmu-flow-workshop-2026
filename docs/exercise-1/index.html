@@ -58,6 +58,10 @@
 <p><strong>Start a new workspace, save it on the local disk, drag in both folders.</strong> You should see sixteen samples.</p>
 </li>
 <li>
+<p><strong>Set all fluorescence axes to biexponential before you gate or cluster.</strong> In the test run FlowJo showed them on a log scale, which hides negative values.</p>
+<p>In the <strong>Graph Window</strong>, click <strong>T</strong> beside a fluorescence axis and select <strong>Customize Axis</strong>. Under <strong>Scale</strong>, choose the biexponential scale, then click <strong>Apply</strong> to update the workspace. Repeat for each fluorescence parameter and check the scale in all samples.</p>
+</li>
+<li>
 <p><strong>Make one group per patient group.</strong></p>
 <p>Click a cell in the <code>GROUP_NAME</code> keyword column, then Workspace tab → Keywords → <strong>Create Group from Keyword Value</strong>. FlowJo makes one group per value.</p>
 </li>
@@ -74,7 +78,7 @@
 <p><strong>Find the cause.</strong> Open the same sample from both folders side by side and go through the five plots below, with the same axes. Check what you found in a second sample.</p>
 </li>
 <li>
-<p><strong>Name the missing step</strong>, the plot that shows it, and what it did to the answer in step 4 and 5.</p>
+<p><strong>Name the missing step</strong>, the plot that shows it, and what it did to the answer in steps 5 and 6.</p>
 </li>
 </ol>
 <h2>Five plots, five preprocessing steps</h2>
@@ -88,7 +92,7 @@
 <tbody>
 <tr>
 <td>Time against CD3</td>
-<td><strong>Quality over time.</strong> A gap, then a stretch with lower signal.</td>
+<td><strong>Quality over time.</strong> A gap, then a stretch with lower signal. If you run FlowAI: check what it removed. In the test run it also discarded the normal stretch after the disturbance.</td>
 </tr>
 <tr>
 <td>FSC-A against SSC-A</td>
@@ -123,6 +127,10 @@
 <p><strong>Start a new workspace, save it on the local disk, drag in both folders.</strong> You should see sixteen samples.</p>
 </li>
 <li>
+<p><strong>Set all fluorescence axes to biexponential before you gate or cluster.</strong> In the test run FlowJo showed them on a log scale, which hides negative values.</p>
+<p>Click <strong>T</strong> beside each fluorescence axis and choose <strong>Biex</strong>.</p>
+</li>
+<li>
 <p><strong>Make one group per patient group.</strong></p>
 <p>Right-click a group → <strong>Create child group from Keyword</strong> → <code>GROUP_NAME</code>.</p>
 </li>
@@ -140,7 +148,7 @@
 <p><strong>Find the cause.</strong> Open the same sample from both folders side by side and go through the five plots below, with the same axes. Check what you found in a second sample.</p>
 </li>
 <li>
-<p><strong>Name the missing step</strong>, the plot that shows it, and what it did to the answer in step 4 and 5.</p>
+<p><strong>Name the missing step</strong>, the plot that shows it, and what it did to the answer in steps 5 and 6.</p>
 </li>
 </ol>
 <h2>Five plots, five preprocessing steps</h2>
@@ -154,7 +162,7 @@
 <tbody>
 <tr>
 <td>Time against CD3</td>
-<td><strong>Quality over time.</strong> A gap, then a stretch with lower signal.</td>
+<td><strong>Quality over time.</strong> A gap, then a stretch with lower signal. If you run FlowAI: check what it removed. In the test run it also discarded the normal stretch after the disturbance.</td>
 </tr>
 <tr>
 <td>FSC-A against SSC-A</td>

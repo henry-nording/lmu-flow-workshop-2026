@@ -45,24 +45,28 @@
 <h2>The study</h2>
 <p>The same eight patients: four <strong>protected</strong>, four <strong>infection-prone</strong>. Hypothesis fixed before the study: <strong>CD8+ MAIT cells are less frequent in infection-prone patients.</strong> This time you let the algorithm find the cell populations.</p>
 <h2>Files</h2>
-<p>Download <strong>Concatenated reference</strong> (8 samples × 5,000 cells) and <strong>Cross-check file</strong>. The cross-check file has no measurement-day alignment. Use it in step 8. Both files carry the extra parameters <code>SampleID</code> (1 to 8), <code>GroupID</code> (1 = protected, 2 = infection-prone) and <code>BatchDay</code> (1 or 2).</p>
+<p>Download <strong>Concatenated reference</strong> (8 samples × 5,000 cells) and <strong>Cross-check file</strong>. The cross-check file has no measurement-day alignment. Use it in step 9. Both files carry the extra parameters <code>SampleID</code> (1 to 8), <code>GroupID</code> (1 = protected, 2 = infection-prone) and <code>BatchDay</code> (1 or 2).</p>
 <h2>Steps</h2>
-<p>These steps use FlowJo v10.10 with the FlowSOM and UMAP plugins.</p>
+<p>These steps use FlowJo v10.10 with the FlowSOM plugin. On Windows, also have the UMAP plugin available.</p>
 <ol>
 <li>
-<p><strong>Load the reference and check transformations.</strong></p>
-<p>Click <strong>FlowJo → Add Samples</strong> and select the reference FCS. Double-click the sample to open its <strong>Graph Window</strong>. Use the axis menus to inspect each cell marker and click the <strong>T</strong> button next to the axis to check its transformation.</p>
+<p><strong>Load the reference file.</strong></p>
+<p>Click <strong>FlowJo → Add Samples</strong> and select the reference FCS. Double-click the sample to open its <strong>Graph Window</strong>.</p>
 </li>
 <li>
-<p><strong>Choose the inputs.</strong> In both the FlowSOM and the UMAP dialog, select the same twelve cell markers. Leave out Time, FSC, SSC, Live-Dead, <code>SampleID</code>, <code>GroupID</code>, and <code>BatchDay</code>. Use the full reference population for both runs.</p>
+<p><strong>Set all fluorescence axes to biexponential before you gate or cluster.</strong> In the test run FlowJo showed them on a log scale, which hides negative values.</p>
+<p>In the <strong>Graph Window</strong>, click <strong>T</strong> beside a fluorescence axis and select <strong>Customize Axis</strong>. Under <strong>Scale</strong>, choose the biexponential scale, then click <strong>Apply</strong> to update the workspace. Repeat for each fluorescence parameter and check the scale in all samples.</p>
+</li>
+<li>
+<p><strong>Choose the inputs.</strong> Use the same twelve cell markers for FlowSOM and for the map. Leave out Time, FSC, SSC, Live-Dead, <code>SampleID</code>, <code>GroupID</code>, and <code>BatchDay</code>. Use the full reference population for both runs.</p>
 </li>
 <li>
 <p><strong>Cluster and draw the map.</strong></p>
-<p>Select the reference sample in the Workspace. Choose <strong>Workspace → Plugins → FlowSOM</strong>, select the marker inputs and request <strong>12 metaclusters</strong>. Run the plugin. Select the same parent sample and choose <strong>Workspace → Plugins → UMAP</strong>. Run it with the same marker inputs and two dimensions. Record any seeds shown in the dialogs.</p>
+<p>Select the reference sample in the Workspace. Choose <strong>Workspace → Plugins → FlowSOM</strong>, select the marker inputs and request <strong>12 metaclusters</strong>. Run the plugin. Reselect the same parent sample. On <strong>Windows</strong>, choose <strong>Workspace → Plugins → UMAP</strong>. On <strong>Mac</strong>, choose <strong>Workspace → Populations → tSNE</strong>. Use the same marker inputs for a two-dimensional map. Record any seeds shown in the dialogs.</p>
 </li>
 <li>
 <p><strong>Name three to five clusters.</strong> Look up which markers identify MAIT cells. Use the marker heatmap to choose the best-matching cluster and explain which marker pattern supports your choice.</p>
-<p>Select the parent of the FlowSOM clusters and click <strong>Workspace → Cluster Explorer</strong>. Select the FlowSOM result, the marker inputs and the UMAP axes, then click <strong>Accept</strong>. Read the cluster rows in the heatmap.</p>
+<p>Select the parent of the FlowSOM clusters and click <strong>Workspace → Cluster Explorer</strong>. Select the FlowSOM result, the marker inputs and the UMAP or tSNE axes for your map, then click <strong>Accept</strong>. Read the cluster rows in the heatmap.</p>
 </li>
 <li>
 <p><strong>Answer the study question.</strong> Calculate one MAIT-cluster percentage per sample. Use the number of events that are both in the candidate cluster and in that sample. Divide by the total events in that sample gate and multiply by 100. Record each sample's <code>GroupID</code> alongside its percentage.</p>
@@ -76,8 +80,8 @@
 <p><strong>Other differences?</strong> Compare the other clusters between the groups. Anything you find here is a hypothesis, not a result: you tested twelve clusters. With a rank test and four against four samples, no finding survives a correction for multiple testing (FDR). And a correction removes chance findings, not artefacts.</p>
 </li>
 <li>
-<p><strong>Cross-check.</strong> Open the <strong>Cross-check file</strong> in a separate workspace or group and repeat steps 2–5 on that file. Plot a histogram of <code>BatchDay</code> and gate values 1 and 2. Compare those two populations on the cross-check UMAP. What changes, and what stays the same?</p>
-<p>Select the cross-check parent and open <strong>Workspace → Cluster Explorer</strong>. Enable <strong>Show Populations as a new Cluster set</strong>, click <strong>Configure</strong>, and choose the two measurement-day gates. Select the cross-check UMAP axes and click <strong>Accept</strong>.</p>
+<p><strong>Cross-check.</strong> Open the <strong>Cross-check file</strong> in a separate workspace or group and repeat steps 2–6 on that file. Plot a histogram of <code>BatchDay</code> and gate values 1 and 2. Compare those two populations on the cross-check map. What changes, and what stays the same?</p>
+<p>Select the cross-check parent and open <strong>Workspace → Cluster Explorer</strong>. Enable <strong>Show Populations as a new Cluster set</strong>, click <strong>Configure</strong>, and choose the two measurement-day gates. Select the UMAP or tSNE axes for your cross-check map and click <strong>Accept</strong>.</p>
 </li>
 </ol>
 <h2>If you have time</h2>
@@ -87,16 +91,20 @@
 <h2>The study</h2>
 <p>The same eight patients: four <strong>protected</strong>, four <strong>infection-prone</strong>. Hypothesis fixed before the study: <strong>CD8+ MAIT cells are less frequent in infection-prone patients.</strong> This time you let the algorithm find the cell populations.</p>
 <h2>Files</h2>
-<p>Download <strong>Concatenated reference</strong> (8 samples × 5,000 cells) and <strong>Cross-check file</strong>. The cross-check file has no measurement-day alignment. Use it in step 8. Both files carry the extra parameters <code>SampleID</code> (1 to 8), <code>GroupID</code> (1 = protected, 2 = infection-prone) and <code>BatchDay</code> (1 or 2).</p>
+<p>Download <strong>Concatenated reference</strong> (8 samples × 5,000 cells) and <strong>Cross-check file</strong>. The cross-check file has no measurement-day alignment. Use it in step 9. Both files carry the extra parameters <code>SampleID</code> (1 to 8), <code>GroupID</code> (1 = protected, 2 = infection-prone) and <code>BatchDay</code> (1 or 2).</p>
 <h2>Steps</h2>
 <p>These steps use FlowJo v11.2 or later, with built-in FlowSOM, UMAP and Cluster Explorer.</p>
 <ol>
 <li>
-<p><strong>Load the reference and check transformations.</strong></p>
-<p>Click <strong>Add Samples</strong> and select the reference FCS. Open <strong>Graphs</strong> in the navigation bar, then click the reference in <strong>Samples</strong>. Select cell markers with the axis menus in the <strong>Primary</strong> plot and click <strong>T</strong> next to the axis to check their transformations.</p>
+<p><strong>Load the reference file.</strong></p>
+<p>Click <strong>Add Samples</strong> and select the reference FCS. Open <strong>Graphs</strong> in the navigation bar, then click the reference in <strong>Samples</strong>.</p>
 </li>
 <li>
-<p><strong>Choose the inputs.</strong> In both the FlowSOM and the UMAP dialog, select the same twelve cell markers. Leave out Time, FSC, SSC, Live-Dead, <code>SampleID</code>, <code>GroupID</code>, and <code>BatchDay</code>. Use the full reference population for both runs.</p>
+<p><strong>Set all fluorescence axes to biexponential before you gate or cluster.</strong> In the test run FlowJo showed them on a log scale, which hides negative values.</p>
+<p>Click <strong>T</strong> beside each fluorescence axis and choose <strong>Biex</strong>.</p>
+</li>
+<li>
+<p><strong>Choose the inputs.</strong> Use the same twelve cell markers for FlowSOM and for the map. Leave out Time, FSC, SSC, Live-Dead, <code>SampleID</code>, <code>GroupID</code>, and <code>BatchDay</code>. Use the full reference population for both runs.</p>
 </li>
 <li>
 <p><strong>Cluster and draw the map.</strong></p>
@@ -118,7 +126,7 @@
 <p><strong>Other differences?</strong> Compare the other clusters between the groups. Anything you find here is a hypothesis, not a result: you tested twelve clusters. With a rank test and four against four samples, no finding survives a correction for multiple testing (FDR). And a correction removes chance findings, not artefacts.</p>
 </li>
 <li>
-<p><strong>Cross-check.</strong> Open the <strong>Cross-check file</strong> in a separate workspace or group and repeat steps 2–5 on that file. Plot a histogram of <code>BatchDay</code> and gate values 1 and 2. Compare those two populations on the cross-check UMAP. What changes, and what stays the same?</p>
+<p><strong>Cross-check.</strong> Open the <strong>Cross-check file</strong> in a separate workspace or group and repeat steps 2–6 on that file. Plot a histogram of <code>BatchDay</code> and gate values 1 and 2. Compare those two populations on the cross-check map. What changes, and what stays the same?</p>
 <p>Name the two day gates <code>BatchDay 1</code> and <code>BatchDay 2</code>. Select their parent and open <strong>Cluster Explorer</strong>. Type <code>BatchDay</code> in <strong>Filter Clusters</strong> and choose the cross-check UMAP axes in <strong>Overlay</strong>.</p>
 </li>
 </ol>
