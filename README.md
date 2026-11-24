@@ -14,6 +14,12 @@ This imports the recognized Markdown files that are present and rebuilds the pag
 
 Use `npm run build` to rebuild using the Markdown already in `content/`. Review the changes in `content/` and `docs/` before pushing them to `main`. The site accepts `?flowjo=v10` or `?flowjo=v11`. The version selector remembers the choice and carries it across internal links.
 
+## Print worksheets
+
+Open **Printable versions** on the home page, select the FlowJo version, and open a worksheet. **Print this page** opens the browser's print dialog. The A4 layout includes the workshop header and footer. Turn off the browser's own headers and footers for a clean copy.
+
+Set worksheets use the shared Exercise 1 instructions when a set-specific Markdown file is absent. If you add a set-specific file, include the instructions that should appear on that worksheet.
+
 ## Update data downloads
 
 Keep the approved data in the GitHub Release assets. Set `release` in `downloads.json` to the new release tag and update the filename, byte count and SHA-256 of each asset. Run `npm run build`, review the repository file list and the Exercise 1 pages and assets, then push. Download each published asset again and compare the byte count and SHA-256 shown on the site.

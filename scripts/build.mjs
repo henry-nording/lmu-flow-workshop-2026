@@ -17,15 +17,17 @@ const sections = {
 const sets = ['A', 'B', 'C', 'D', 'E'];
 const pages = [
   { route: '', label: 'Home', heading: title, source: 'index.md' },
-  { route: 'exercise-1/', label: 'Exercise 1', heading: 'Exercise 1: Find the error', source: 'exercise_1.md' },
-  { route: 'exercise-2/', label: 'Exercise 2', heading: 'Exercise 2: Cluster and name', source: 'exercise_2.md' },
+  { route: 'exercise-1/', label: 'Exercise 1', heading: 'Exercise 1: Find the error', source: 'exercise_1.md', printable: true },
+  { route: 'exercise-2/', label: 'Exercise 2', heading: 'Exercise 2: Cluster and name', source: 'exercise_2.md', printable: true },
   { route: 'downloads/', label: 'Downloads', heading: 'Downloads' },
   { route: 'glossary/', label: 'Glossary', heading: 'Glossary', source: 'glossary.md' },
+  { route: 'printable/', heading: 'Printable versions' },
   ...sets.map(set => ({
     route: `exercise-1/set-${set.toLowerCase()}/`,
     heading: `Set ${set}`,
     source: `exercise_1_set_${set.toLowerCase()}.md`,
     set,
+    printable: true,
   })),
 ];
 const markdown = new MarkdownIt({ html: false });
@@ -97,6 +99,12 @@ function layout(page, base, main) {
   const navigation = pages.filter(p => p.label).map(p =>
     workshopLink(base + (p.route || './'), p.label, p.route === page.route)).join('\n');
   const pageTitle = page.route ? `${page.heading} | ${title}` : title;
+  const printStyles = page.printable
+    ? `\n  <link rel="stylesheet" href="${base}assets/print.css" media="print">` : '';
+  const worksheet = page.set ? `Exercise 1: Find the error · Set ${page.set}` : page.heading;
+  const printBrand = page.printable ? `\n        <div class="brand print-only">${title}
+          <span class="print-running-title">${escape(worksheet)} · <span data-print-version>FlowJo v10</span></span>
+        </div>` : '';
   return `<!doctype html>
 <html lang="en">
 <head>
@@ -105,7 +113,7 @@ function layout(page, base, main) {
   <title>${escape(pageTitle)}</title>
   <link rel="icon" href="${base}assets/cic-logo.png">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&display=swap">
-  <link rel="stylesheet" href="${base}assets/workshop.css">
+  <link rel="stylesheet" href="${base}assets/workshop.css">${printStyles}
   <script src="${base}assets/flowjo.js" defer></script>
 </head>
 <body>
@@ -113,7 +121,7 @@ function layout(page, base, main) {
   <header>
     <div class="masthead">
       <div class="wrap masthead-inner">
-        <a class="brand" href="${base}./" data-workshop-page>${title}</a>
+        <a class="brand${page.printable ? ' screen-only' : ''}" href="${base}./" data-workshop-page>${title}</a>${printBrand}
         <img class="cic" src="${base}assets/cic-logo.png" alt="CIC logo">
       </div>
     </div>
@@ -171,7 +179,24 @@ function home(base, versions) {
   <nav class="cards" aria-label="Workshop materials">
     ${links.map(([route, name, detail]) => `<a class="card" href="${base}${route}" data-workshop-page>
       <strong>${name}</strong><span>${detail}</span></a>`).join('\n')}
-  </nav>`;
+  </nav>
+  <p class="printable-link">${workshopLink(base + 'printable/', 'Printable versions')}</p>`;
+}
+
+function printableVersions(base) {
+  const exercise1 = pages.find(page => page.route === 'exercise-1/');
+  const exercise2 = pages.find(page => page.route === 'exercise-2/');
+  const setLinks = pages.filter(page => page.set).map(page =>
+    `<li>${workshopLink(base + page.route, page.heading)}</li>`
+  ).join('\n');
+  return introduction('Printable versions',
+    '<p>Choose the FlowJo version you need, open a worksheet, and select Print this page. The worksheets are formatted for A4.</p>') +
+    `<ul class="printable-list">
+      <li>${workshopLink(base + exercise1.route, exercise1.heading)}
+        <ul>${setLinks}</ul>
+      </li>
+      <li>${workshopLink(base + exercise2.route, exercise2.heading)}</li>
+    </ul>`;
 }
 
 function formatBytes(bytes) {
@@ -202,20 +227,27 @@ function glossary(base, versions, pdf) {
       <code class="digest">SHA-256 ${createHash('sha256').update(pdf).digest('hex')}</code>`;
 }
 
-function exercise(page, base, versions) {
+function exercise(page, base, versions, sharedExercise1) {
+  const printButton = '<button class="print-button" type="button" data-print-page hidden>Print this page</button>';
+  const placeholder = '<p>Workshop instructions will be available here.</p>';
   if (page.set) {
     const parent = workshopLink(base + 'exercise-1/', 'Exercise 1: Find the error');
-    const breadcrumb = `<p class="crumb">${parent}</p>`;
+    const breadcrumb = `<p class="crumb screen-only">${parent}</p>
+      <p class="print-only print-context">Exercise 1: Find the error</p>`;
     const fileLink = workshopLink(base + 'downloads/#exercise1', 'Downloads');
     const overview = workshopLink(base + 'exercise-1/', 'Exercise 1 instructions');
     const fallback = `<p>Download Reference and Set ${page.set} from ${fileLink}.
       Follow the ${overview} using your set.</p>`;
-    return introduction(page.heading, '', breadcrumb) + setNavigation(base, page.set) + article(versions, fallback);
+    const content = versions ? article(versions)
+      : `<div class="screen-only">${article(null, fallback)}</div>
+        <div class="print-only">${article(sharedExercise1, placeholder)}</div>`;
+    return introduction(page.heading, '', breadcrumb) + setNavigation(base, page.set) +
+      `<p class="exercise-actions screen-only">${printButton}</p>` + content;
   }
   const first = page.route === 'exercise-1/';
   const fileLink = workshopLink(base + `downloads/#${first ? 'exercise1' : 'exercise2'}`, 'Get the exercise files');
   return introduction(page.heading) + (first ? setNavigation(base) : '') +
-    `<p>${fileLink}</p>` + article(versions, '<p>Workshop instructions will be available here.</p>');
+    `<p class="exercise-actions screen-only">${fileLink}${printButton}</p>` + article(versions, placeholder);
 }
 
 function readManifest(text) {
@@ -241,22 +273,26 @@ const source = resolveSources(process.argv.slice(2));
 const manifest = readManifest(await readFile(join(root, 'downloads.json'), 'utf8'));
 const pdf = await readFile(join(docs, 'glossary.pdf'));
 const variants = new RegExp(['qc', 'doublets', 'livedead', 'batch', 'debris'].map(name => `no_${name}`).join('|'), 'i');
-const generated = await Promise.all(pages.map(async page => {
-  const base = '../'.repeat(page.route.split('/').length - 1);
+const sources = await Promise.all(pages.map(async page => {
   const incoming = source && page.source ? await optionalText(join(source, page.source)) : null;
   const text = incoming ?? (page.source ? await optionalText(join(contentFolder, page.source)) : null);
-  const versions = text ? versionedMarkdown(text, page.source) : null;
+  return { page, incoming, text, versions: text ? versionedMarkdown(text, page.source) : null };
+}));
+const sharedExercise1 = sources.find(({ page }) => page.route === 'exercise-1/').versions;
+const generated = sources.map(({ page, incoming, text, versions }) => {
+  const base = '../'.repeat(page.route.split('/').length - 1);
   let main;
   if (!page.route) main = home(base, versions);
   else if (page.route === 'downloads/') main = downloads(manifest);
   else if (page.route === 'glossary/') main = glossary(base, versions, pdf);
-  else main = exercise(page, base, versions);
+  else if (page.route === 'printable/') main = printableVersions(base);
+  else main = exercise(page, base, versions, sharedExercise1);
   const html = layout(page, base, main);
   if (page.route.startsWith('exercise-1/') && (variants.test(html) || variants.test(text ?? ''))) {
     throw new Error(`Exercise 1 discloses a data variant in ${page.source}`);
   }
   return { page, incoming, html };
-}));
+});
 
 if (source && !generated.some(item => item.incoming !== null)) {
   throw new Error(`No recognized Markdown files found in ${source}`);

@@ -7,6 +7,7 @@
   <link rel="icon" href="../assets/cic-logo.png">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&display=swap">
   <link rel="stylesheet" href="../assets/workshop.css">
+  <link rel="stylesheet" href="../assets/print.css" media="print">
   <script src="../assets/flowjo.js" defer></script>
 </head>
 <body>
@@ -14,7 +15,10 @@
   <header>
     <div class="masthead">
       <div class="wrap masthead-inner">
-        <a class="brand" href=".././" data-workshop-page>High-Dimensional Spectral Flow Data Analysis</a>
+        <a class="brand screen-only" href=".././" data-workshop-page>High-Dimensional Spectral Flow Data Analysis</a>
+        <div class="brand print-only">High-Dimensional Spectral Flow Data Analysis
+          <span class="print-running-title">Exercise 1: Find the error · <span data-print-version>FlowJo v10</span></span>
+        </div>
         <img class="cic" src="../assets/cic-logo.png" alt="CIC logo">
       </div>
     </div>
@@ -41,7 +45,7 @@
 <a href="../exercise-1/set-b/" data-workshop-page>Set B</a>
 <a href="../exercise-1/set-c/" data-workshop-page>Set C</a>
 <a href="../exercise-1/set-d/" data-workshop-page>Set D</a>
-<a href="../exercise-1/set-e/" data-workshop-page>Set E</a></div></nav><p><a href="../downloads/#exercise1" data-workshop-page>Get the exercise files</a></p><div class="article" data-version-content><p>Work in pairs, 45 to 60 minutes.</p>
+<a href="../exercise-1/set-e/" data-workshop-page>Set E</a></div></nav><p class="exercise-actions screen-only"><a href="../downloads/#exercise1" data-workshop-page>Get the exercise files</a><button class="print-button" type="button" data-print-page hidden>Print this page</button></p><div class="article" data-version-content><p>Work in pairs, 45 to 60 minutes.</p>
 <h2>The study</h2>
 <p>Eight patients, two groups of four: <strong>protected</strong> and <strong>infection-prone</strong>. Our hypothesis, fixed before the study: <strong>CD8+ MAIT cells (CD3+ CD8+ CD161 high, TCR Vα7.2+) are less frequent in infection-prone patients.</strong></p>
 <p>You get the same eight samples twice: <strong>Reference</strong>, cleanly preprocessed, and <strong>your set</strong>, in which exactly one preprocessing step was left out. Find the missing step, and find out what it does to the answer of the study.</p>

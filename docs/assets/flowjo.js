@@ -5,6 +5,8 @@
   const content = document.querySelector('[data-version-content]');
   const defaultContent = content?.cloneNode(true);
   const v11Content = document.querySelector('template[data-version="v11"]');
+  const printVersion = document.querySelector('[data-print-version]');
+  const printButton = document.querySelector('[data-print-page]');
   let selected;
 
   function storedVersion() {
@@ -22,6 +24,7 @@
     }
     selected = version;
     picker.querySelector(`input[value="${version}"]`).checked = true;
+    if (printVersion) printVersion.textContent = `FlowJo ${version}`;
     for (const link of document.querySelectorAll('a[data-workshop-page]')) {
       const target = new URL(link.href);
       target.searchParams.set('flowjo', version);
@@ -48,6 +51,10 @@
     history.replaceState(null, '', url);
     show(version);
   });
+  if (printButton) {
+    printButton.hidden = false;
+    printButton.addEventListener('click', () => window.print());
+  }
   addEventListener('pageshow', () => show(readVersion()));
   show(readVersion());
 })();

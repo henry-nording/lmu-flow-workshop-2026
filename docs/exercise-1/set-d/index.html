@@ -7,6 +7,7 @@
   <link rel="icon" href="../../assets/cic-logo.png">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&display=swap">
   <link rel="stylesheet" href="../../assets/workshop.css">
+  <link rel="stylesheet" href="../../assets/print.css" media="print">
   <script src="../../assets/flowjo.js" defer></script>
 </head>
 <body>
@@ -14,7 +15,10 @@
   <header>
     <div class="masthead">
       <div class="wrap masthead-inner">
-        <a class="brand" href="../.././" data-workshop-page>High-Dimensional Spectral Flow Data Analysis</a>
+        <a class="brand screen-only" href="../.././" data-workshop-page>High-Dimensional Spectral Flow Data Analysis</a>
+        <div class="brand print-only">High-Dimensional Spectral Flow Data Analysis
+          <span class="print-running-title">Exercise 1: Find the error · Set D · <span data-print-version>FlowJo v10</span></span>
+        </div>
         <img class="cic" src="../../assets/cic-logo.png" alt="CIC logo">
       </div>
     </div>
@@ -36,13 +40,145 @@
     </div>
   </header>
   <main class="wrap" id="main">
-    <div class="intro"><p class="crumb"><a href="../../exercise-1/" data-workshop-page>Exercise 1: Find the error</a></p><h1>Set D</h1></div><nav class="set-nav" aria-labelledby="your-set"><h2 id="your-set">Your set</h2>
+    <div class="intro"><p class="crumb screen-only"><a href="../../exercise-1/" data-workshop-page>Exercise 1: Find the error</a></p>
+      <p class="print-only print-context">Exercise 1: Find the error</p><h1>Set D</h1></div><nav class="set-nav" aria-labelledby="your-set"><h2 id="your-set">Your set</h2>
     <div class="set-list"><a href="../../exercise-1/set-a/" data-workshop-page>Set A</a>
 <a href="../../exercise-1/set-b/" data-workshop-page>Set B</a>
 <a href="../../exercise-1/set-c/" data-workshop-page>Set C</a>
 <a href="../../exercise-1/set-d/" data-workshop-page aria-current="page">Set D</a>
-<a href="../../exercise-1/set-e/" data-workshop-page>Set E</a></div></nav><div class="article"><p>Download Reference and Set D from <a href="../../downloads/#exercise1" data-workshop-page>Downloads</a>.
-      Follow the <a href="../../exercise-1/" data-workshop-page>Exercise 1 instructions</a> using your set.</p></div>
+<a href="../../exercise-1/set-e/" data-workshop-page>Set E</a></div></nav><p class="exercise-actions screen-only"><button class="print-button" type="button" data-print-page hidden>Print this page</button></p><div class="screen-only"><div class="article"><p>Download Reference and Set D from <a href="../../downloads/#exercise1" data-workshop-page>Downloads</a>.
+      Follow the <a href="../../exercise-1/" data-workshop-page>Exercise 1 instructions</a> using your set.</p></div></div>
+        <div class="print-only"><div class="article" data-version-content><p>Work in pairs, 45 to 60 minutes.</p>
+<h2>The study</h2>
+<p>Eight patients, two groups of four: <strong>protected</strong> and <strong>infection-prone</strong>. Our hypothesis, fixed before the study: <strong>CD8+ MAIT cells (CD3+ CD8+ CD161 high, TCR Vα7.2+) are less frequent in infection-prone patients.</strong></p>
+<p>You get the same eight samples twice: <strong>Reference</strong>, cleanly preprocessed, and <strong>your set</strong>, in which exactly one preprocessing step was left out. Find the missing step, and find out what it does to the answer of the study.</p>
+<h2>Files</h2>
+<p>Download <strong>Reference</strong> and <strong>your set</strong> (Downloads page). File names give set, sample, group and measurement day, for example <code>REF_S03_protected_day2.fcs</code> and <code>A_S03_protected_day2.fcs</code>. Each file also carries the keywords <code>GROUP_NAME</code> and <code>BATCH_DAY</code>.</p>
+<h2>Steps</h2>
+<ol>
+<li>
+<p><strong>Start a new workspace, save it on the local disk, drag in both folders.</strong> You should see sixteen samples.</p>
+</li>
+<li>
+<p><strong>Make one group per patient group.</strong></p>
+<p>Click a cell in the <code>GROUP_NAME</code> keyword column, then Workspace tab → Keywords → <strong>Create Group from Keyword Value</strong>. FlowJo makes one group per value.</p>
+</li>
+<li>
+<p><strong>Compare the number of events</strong> of the same sample in both folders. More events than in the reference, or the same number? What could that mean?</p>
+</li>
+<li>
+<p><strong>Answer the study question in both folders.</strong> Gate MAIT cells directly on all events, without clean-up gates: CD3+ → CD8+ → CD161 high and TCR Vα7.2+. Use the same gate in both folders. Note the MAIT share of all events for each sample.</p>
+</li>
+<li>
+<p><strong>Test.</strong> With four against four samples, sort the eight values. If all four of one group lie above all four of the other: p = 0.029. One overlap: p = 0.057, not significant. This is the smallest p a rank test can give with four against four.</p>
+</li>
+<li>
+<p><strong>Find the cause.</strong> Open the same sample from both folders side by side and go through the five plots below, with the same axes. Check what you found in a second sample.</p>
+</li>
+<li>
+<p><strong>Name the missing step</strong>, the plot that shows it, and what it did to the answer in step 4 and 5.</p>
+</li>
+</ol>
+<h2>Five plots, five preprocessing steps</h2>
+<table>
+<thead>
+<tr>
+<th>Plot</th>
+<th>What to look for</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Time against CD3</td>
+<td><strong>Quality over time.</strong> A gap, then a stretch with lower signal.</td>
+</tr>
+<tr>
+<td>FSC-A against SSC-A</td>
+<td><strong>Debris.</strong> Events at low FSC and SSC.</td>
+</tr>
+<tr>
+<td>FSC-A against FSC-H</td>
+<td><strong>Doublets.</strong> A second cloud beside the diagonal. Many doublets carry markers of two lineages, for example CD3 and CD19.</td>
+</tr>
+<tr>
+<td>Live-Dead against CD3</td>
+<td><strong>Dead cells.</strong> Live-Dead-positive events that seem to stain for every marker.</td>
+</tr>
+<tr>
+<td>CCR7 histogram, a day 1 and a day 2 sample overlaid</td>
+<td><strong>Measurement day.</strong> The same population sits at a different position on the two days. Also try CD161.</td>
+</tr>
+</tbody>
+</table>
+<h2>If you have time</h2>
+<p>Transformation is the sixth step, and it is not in the files. Switch the CD4 axis from biexponential to linear and look at the same cells.</p>
+</div>
+    <template data-version="v11"><p>Work in pairs, 45 to 60 minutes.</p>
+<h2>The study</h2>
+<p>Eight patients, two groups of four: <strong>protected</strong> and <strong>infection-prone</strong>. Our hypothesis, fixed before the study: <strong>CD8+ MAIT cells (CD3+ CD8+ CD161 high, TCR Vα7.2+) are less frequent in infection-prone patients.</strong></p>
+<p>You get the same eight samples twice: <strong>Reference</strong>, cleanly preprocessed, and <strong>your set</strong>, in which exactly one preprocessing step was left out. Find the missing step, and find out what it does to the answer of the study.</p>
+<h2>Files</h2>
+<p>Download <strong>Reference</strong> and <strong>your set</strong> (Downloads page). File names give set, sample, group and measurement day, for example <code>REF_S03_protected_day2.fcs</code> and <code>A_S03_protected_day2.fcs</code>. Each file also carries the keywords <code>GROUP_NAME</code> and <code>BATCH_DAY</code>.</p>
+<h2>Steps</h2>
+<ol>
+<li>
+<p><strong>Start a new workspace, save it on the local disk, drag in both folders.</strong> You should see sixteen samples.</p>
+</li>
+<li>
+<p><strong>Make one group per patient group.</strong></p>
+<p>Right-click a group → <strong>Create child group from Keyword</strong> → <code>GROUP_NAME</code>.</p>
+</li>
+<li>
+<p><strong>Compare the number of events</strong> of the same sample in both folders. More events than in the reference, or the same number? What could that mean?</p>
+</li>
+<li>
+<p><strong>Answer the study question in both folders.</strong> Gate MAIT cells directly on all events, without clean-up gates: CD3+ → CD8+ → CD161 high and TCR Vα7.2+. Use the same gate in both folders. Note the MAIT share of all events for each sample.</p>
+</li>
+<li>
+<p><strong>Test.</strong> With four against four samples, sort the eight values. If all four of one group lie above all four of the other: p = 0.029. One overlap: p = 0.057, not significant. This is the smallest p a rank test can give with four against four.</p>
+<p>Or in FlowJo: Charts, main factor <code>GROUP_NAME</code>, baseline <code>protected</code>, test <strong>Wilcoxon rank-sum</strong>.</p>
+</li>
+<li>
+<p><strong>Find the cause.</strong> Open the same sample from both folders side by side and go through the five plots below, with the same axes. Check what you found in a second sample.</p>
+</li>
+<li>
+<p><strong>Name the missing step</strong>, the plot that shows it, and what it did to the answer in step 4 and 5.</p>
+</li>
+</ol>
+<h2>Five plots, five preprocessing steps</h2>
+<table>
+<thead>
+<tr>
+<th>Plot</th>
+<th>What to look for</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Time against CD3</td>
+<td><strong>Quality over time.</strong> A gap, then a stretch with lower signal.</td>
+</tr>
+<tr>
+<td>FSC-A against SSC-A</td>
+<td><strong>Debris.</strong> Events at low FSC and SSC.</td>
+</tr>
+<tr>
+<td>FSC-A against FSC-H</td>
+<td><strong>Doublets.</strong> A second cloud beside the diagonal. Many doublets carry markers of two lineages, for example CD3 and CD19.</td>
+</tr>
+<tr>
+<td>Live-Dead against CD3</td>
+<td><strong>Dead cells.</strong> Live-Dead-positive events that seem to stain for every marker.</td>
+</tr>
+<tr>
+<td>CCR7 histogram, a day 1 and a day 2 sample overlaid</td>
+<td><strong>Measurement day.</strong> The same population sits at a different position on the two days. Also try CD161.</td>
+</tr>
+</tbody>
+</table>
+<h2>If you have time</h2>
+<p>Transformation is the sixth step, and it is not in the files. Switch the CD4 axis from biexponential to linear and look at the same cells.</p>
+</template></div>
   </main>
   <footer class="site-footer">
     <div class="wrap footer-inner">

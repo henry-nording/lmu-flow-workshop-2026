@@ -176,6 +176,20 @@ code { font-family: Consolas, "Courier New", monospace; font-size: .9em; }
 .footer-inner { display: flex; align-items: center; justify-content: space-between; gap: .85rem; }
 .footer-inner span { color: var(--muted); font-size: .875rem; }
 .cau { width: 4.4rem; height: auto; flex: none; }
+.print-only { display: none; }
+.printable-link { margin-top: 1.4rem; font-weight: 700; }
+.printable-list li { margin-block: .4rem; }
+.exercise-actions { display: flex; flex-wrap: wrap; align-items: center; gap: .6rem 1rem; }
+.print-button {
+  border: 1px solid var(--navy);
+  border-radius: .28rem;
+  background: white;
+  color: var(--navy);
+  cursor: pointer;
+  font: 700 .875rem/1.3 Arial, sans-serif;
+  padding: .55rem .85rem;
+}
+.print-button:hover { background: var(--soft); }
 
 @media (max-width: 42rem) {
   .navigation-inner { flex-wrap: wrap; padding-block: .35rem .55rem; }
