@@ -4,7 +4,7 @@ Work in pairs, 45 to 60 minutes.
 
 ## The study
 
-Eight patients, two groups of four: **protected** and **infection-prone**. Our hypothesis, fixed before the study: **CD8+ MAIT cells (CD3+ CD8+ CD161 high, TCR Vα7.2+) are less frequent in infection-prone patients.**
+Eight patients, two groups of four: **protected** and **infection-prone**. Our hypothesis, fixed before the study: **CD8+ MAIT cells are less frequent in infection-prone patients.**
 
 You get the same eight samples twice: **Reference**, cleanly preprocessed, and **your set**, in which exactly one preprocessing step was left out. Find the missing step, and find out what it does to the answer of the study.
 
@@ -26,7 +26,7 @@ Right-click a group → **Create child group from Keyword** → `GROUP_NAME`.
 :::
 
 3. **Compare the number of events** of the same sample in both folders. More events than in the reference, or the same number? What could that mean?
-4. **Answer the study question in both folders.** Gate MAIT cells directly on all events, without clean-up gates: CD3+ → CD8+ → CD161 high and TCR Vα7.2+. Use the same gate in both folders. Note the MAIT share of all events for each sample.
+4. **Answer the study question in both folders.** Look up which markers identify MAIT cells. Gate them directly on all events, without clean-up gates, and write down your gating path. Use the same gates in both folders. Note the MAIT share of all events for each sample.
 5. **Test.** With four against four samples, sort the eight values. If all four of one group lie above all four of the other: p = 0.029. One overlap: p = 0.057, not significant. This is the smallest p a rank test can give with four against four.
 
 ::: v11

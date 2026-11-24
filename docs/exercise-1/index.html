@@ -47,7 +47,7 @@
 <a href="../exercise-1/set-d/" data-workshop-page>Set D</a>
 <a href="../exercise-1/set-e/" data-workshop-page>Set E</a></div></nav><p class="exercise-actions screen-only"><a href="../downloads/#exercise1" data-workshop-page>Get the exercise files</a><button class="print-button" type="button" data-print-page hidden>Print this page</button></p><div class="article" data-version-content><p>Work in pairs, 45 to 60 minutes.</p>
 <h2>The study</h2>
-<p>Eight patients, two groups of four: <strong>protected</strong> and <strong>infection-prone</strong>. Our hypothesis, fixed before the study: <strong>CD8+ MAIT cells (CD3+ CD8+ CD161 high, TCR Vα7.2+) are less frequent in infection-prone patients.</strong></p>
+<p>Eight patients, two groups of four: <strong>protected</strong> and <strong>infection-prone</strong>. Our hypothesis, fixed before the study: <strong>CD8+ MAIT cells are less frequent in infection-prone patients.</strong></p>
 <p>You get the same eight samples twice: <strong>Reference</strong>, cleanly preprocessed, and <strong>your set</strong>, in which exactly one preprocessing step was left out. Find the missing step, and find out what it does to the answer of the study.</p>
 <h2>Files</h2>
 <p>Download <strong>Reference</strong> and <strong>your set</strong> (Downloads page). File names give set, sample, group and measurement day, for example <code>REF_S03_protected_day2.fcs</code> and <code>A_S03_protected_day2.fcs</code>. Each file also carries the keywords <code>GROUP_NAME</code> and <code>BATCH_DAY</code>.</p>
@@ -64,7 +64,7 @@
 <p><strong>Compare the number of events</strong> of the same sample in both folders. More events than in the reference, or the same number? What could that mean?</p>
 </li>
 <li>
-<p><strong>Answer the study question in both folders.</strong> Gate MAIT cells directly on all events, without clean-up gates: CD3+ → CD8+ → CD161 high and TCR Vα7.2+. Use the same gate in both folders. Note the MAIT share of all events for each sample.</p>
+<p><strong>Answer the study question in both folders.</strong> Look up which markers identify MAIT cells. Gate them directly on all events, without clean-up gates, and write down your gating path. Use the same gates in both folders. Note the MAIT share of all events for each sample.</p>
 </li>
 <li>
 <p><strong>Test.</strong> With four against four samples, sort the eight values. If all four of one group lie above all four of the other: p = 0.029. One overlap: p = 0.057, not significant. This is the smallest p a rank test can give with four against four.</p>
@@ -112,7 +112,7 @@
 </div>
     <template data-version="v11"><p>Work in pairs, 45 to 60 minutes.</p>
 <h2>The study</h2>
-<p>Eight patients, two groups of four: <strong>protected</strong> and <strong>infection-prone</strong>. Our hypothesis, fixed before the study: <strong>CD8+ MAIT cells (CD3+ CD8+ CD161 high, TCR Vα7.2+) are less frequent in infection-prone patients.</strong></p>
+<p>Eight patients, two groups of four: <strong>protected</strong> and <strong>infection-prone</strong>. Our hypothesis, fixed before the study: <strong>CD8+ MAIT cells are less frequent in infection-prone patients.</strong></p>
 <p>You get the same eight samples twice: <strong>Reference</strong>, cleanly preprocessed, and <strong>your set</strong>, in which exactly one preprocessing step was left out. Find the missing step, and find out what it does to the answer of the study.</p>
 <h2>Files</h2>
 <p>Download <strong>Reference</strong> and <strong>your set</strong> (Downloads page). File names give set, sample, group and measurement day, for example <code>REF_S03_protected_day2.fcs</code> and <code>A_S03_protected_day2.fcs</code>. Each file also carries the keywords <code>GROUP_NAME</code> and <code>BATCH_DAY</code>.</p>
@@ -129,7 +129,7 @@
 <p><strong>Compare the number of events</strong> of the same sample in both folders. More events than in the reference, or the same number? What could that mean?</p>
 </li>
 <li>
-<p><strong>Answer the study question in both folders.</strong> Gate MAIT cells directly on all events, without clean-up gates: CD3+ → CD8+ → CD161 high and TCR Vα7.2+. Use the same gate in both folders. Note the MAIT share of all events for each sample.</p>
+<p><strong>Answer the study question in both folders.</strong> Look up which markers identify MAIT cells. Gate them directly on all events, without clean-up gates, and write down your gating path. Use the same gates in both folders. Note the MAIT share of all events for each sample.</p>
 </li>
 <li>
 <p><strong>Test.</strong> With four against four samples, sort the eight values. If all four of one group lie above all four of the other: p = 0.029. One overlap: p = 0.057, not significant. This is the smallest p a rank test can give with four against four.</p>

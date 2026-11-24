@@ -54,7 +54,7 @@ Select the parent of the FlowSOM clusters in **Populations**, then click **Clust
 5. **Answer the study question.** Calculate one MAIT-cluster percentage per sample. Use the number of events that are both in the candidate cluster and in that sample. Divide by the total events in that sample gate and multiply by 100. Record each sample's `GroupID` alongside its percentage.
 
 ::: v10
-Open a histogram of `SampleID` in the **Graph Window** and draw a range gate for each of the eight peaks. In the Workspace, select a sample gate and the candidate cluster together with Ctrl (Windows) or Command (Mac), then click **Make AND Gate** in the **Boolean** band. Repeat for each sample. Use **FlowJo → Table Editor** and **Edit → Add Column → Statistic** to collect the **Count** for the sample gates and their AND gates.
+Double-click the MAIT candidate cluster to open its **Graph Window** and plot a histogram of `SampleID`. Draw eight range gates, one centred on each ID from 1 to 8, including any ID with no peak. In the Workspace, select the eight gates and drag them onto the cluster's parent population to copy them. In **FlowJo → Table Editor**, use **Edit → Add Column → Statistic** to put the **Count** for each cluster gate beside the **Count** for the matching parent gate. For each sample, divide the cluster-gate count by the parent-gate count and multiply by 100.
 :::
 
 ::: v11

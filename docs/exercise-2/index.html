@@ -65,7 +65,7 @@
 </li>
 <li>
 <p><strong>Answer the study question.</strong> Calculate one MAIT-cluster percentage per sample. Use the number of events that are both in the candidate cluster and in that sample. Divide by the total events in that sample gate and multiply by 100. Record each sample's <code>GroupID</code> alongside its percentage.</p>
-<p>Open a histogram of <code>SampleID</code> in the <strong>Graph Window</strong> and draw a range gate for each of the eight peaks. In the Workspace, select a sample gate and the candidate cluster together with Ctrl (Windows) or Command (Mac), then click <strong>Make AND Gate</strong> in the <strong>Boolean</strong> band. Repeat for each sample. Use <strong>FlowJo → Table Editor</strong> and <strong>Edit → Add Column → Statistic</strong> to collect the <strong>Count</strong> for the sample gates and their AND gates.</p>
+<p>Double-click the MAIT candidate cluster to open its <strong>Graph Window</strong> and plot a histogram of <code>SampleID</code>. Draw eight range gates, one centred on each ID from 1 to 8, including any ID with no peak. In the Workspace, select the eight gates and drag them onto the cluster's parent population to copy them. In <strong>FlowJo → Table Editor</strong>, use <strong>Edit → Add Column → Statistic</strong> to put the <strong>Count</strong> for each cluster gate beside the <strong>Count</strong> for the matching parent gate. For each sample, divide the cluster-gate count by the parent-gate count and multiply by 100.</p>
 <p>Compare the eight sample percentages with a two-sided Wilcoxon rank-sum test. With no ties and all four values in one group above all four in the other, the exact p-value is 0.029.</p>
 </li>
 <li>
