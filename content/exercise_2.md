@@ -8,7 +8,7 @@ The same eight patients: four **protected**, four **infection-prone**. Hypothesi
 
 ## Files
 
-Download **Concatenated reference** (8 samples × 5,000 cells) and **Cross-check file** from Downloads. The cross-check file has no measurement-day alignment. Use it in step 8. Both files carry the extra parameters `SampleID` (1 to 8), `GroupID` (1 = protected, 2 = infection-prone) and `BatchDay` (1 or 2).
+Download **Concatenated reference** (8 samples × 5,000 cells) and **Cross-check file**. The cross-check file has no measurement-day alignment. Use it in step 8. Both files carry the extra parameters `SampleID` (1 to 8), `GroupID` (1 = protected, 2 = infection-prone) and `BatchDay` (1 or 2).
 
 ## Steps
 

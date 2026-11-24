@@ -10,7 +10,7 @@ You get the same eight samples twice: **Reference**, cleanly preprocessed, and *
 
 ## Files
 
-Download **Reference** and **your set** (Downloads page). File names give set, sample, group and measurement day, for example `REF_S03_protected_day2.fcs` and `A_S03_protected_day2.fcs`. Each file also carries the keywords `GROUP_NAME` and `BATCH_DAY`.
+Download **Reference** and **your set**. File names give set, sample, group and measurement day, for example `REF_S03_protected_day2.fcs` and `A_S03_protected_day2.fcs`. Each file also carries the keywords `GROUP_NAME` and `BATCH_DAY`.
 
 ## Steps
 

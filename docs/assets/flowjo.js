@@ -1,6 +1,7 @@
 (() => {
   const storageKey = 'lmu-flow-workshop-2026.flowjo';
   const versions = new Set(['v10', 'v11']);
+  const revision = new URL(location.href).searchParams.get('rev');
   const picker = document.querySelector('[data-version-picker]');
   const content = document.querySelector('[data-version-content]');
   const defaultContent = content?.cloneNode(true);
@@ -28,6 +29,7 @@
     for (const link of document.querySelectorAll('a[data-workshop-page]')) {
       const target = new URL(link.href);
       target.searchParams.set('flowjo', version);
+      if (revision) target.searchParams.set('rev', revision);
       link.href = target;
     }
   }

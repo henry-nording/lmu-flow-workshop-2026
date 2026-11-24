@@ -128,6 +128,7 @@ a { color: var(--navy); text-underline-offset: .16em; }
 .card span { display: block; color: var(--muted); font-size: .925rem; margin-top: .2rem; }
 .set-nav { margin-block: 0 1.8rem; }
 .set-nav h2 { margin-block: 0 .6rem; }
+.set-help { margin: 0 0 .65rem; color: var(--muted); }
 .set-list { display: flex; flex-wrap: wrap; gap: .45rem; }
 .set-list a {
   display: inline-flex;
