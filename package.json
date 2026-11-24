@@ -1,0 +1,12 @@
+{
+  "name": "lmu-flow-workshop-2026",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "refresh": "node scripts/build.mjs --from"
+  },
+  "dependencies": {
+    "markdown-it": "14.1.1"
+  }
+}

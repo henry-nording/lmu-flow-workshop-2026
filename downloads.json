@@ -1,0 +1,68 @@
+{
+  "release": "data-v1.3",
+  "assets": [
+    {
+      "section": "exercise1",
+      "label": "Reference",
+      "name": "Reference.zip",
+      "bytes": 20945876,
+      "sha256": "4117cb2d156a4013725f53154d0d72da0db68687d32624dae5ef003a3eeaf249"
+    },
+    {
+      "section": "exercise1",
+      "label": "Set A",
+      "name": "Set_A.zip",
+      "bytes": 21954038,
+      "sha256": "f3ff0b9146e002ba0b6d4a51f37e584893f2a9ad799316463ed399417829bde4"
+    },
+    {
+      "section": "exercise1",
+      "label": "Set B",
+      "name": "Set_B.zip",
+      "bytes": 20929017,
+      "sha256": "101b9c2bf97244d7033a43c1a0bed01901a482019f9442ef46def388d17bbd9e"
+    },
+    {
+      "section": "exercise1",
+      "label": "Set C",
+      "name": "Set_C.zip",
+      "bytes": 22914818,
+      "sha256": "b914b84a180c13271eee6b98417ef6ec4adb830ae71f9684d25cf1d50c865707"
+    },
+    {
+      "section": "exercise1",
+      "label": "Set D",
+      "name": "Set_D.zip",
+      "bytes": 22101753,
+      "sha256": "28726eb8bdf4c12c81340f45461fada1afa91813a6560fc6e3c9b24c7a701921"
+    },
+    {
+      "section": "exercise1",
+      "label": "Set E",
+      "name": "Set_E.zip",
+      "bytes": 22235755,
+      "sha256": "895ec3103348cb8fea104840239ed34a31649373e2eb7edacfec21352376377b"
+    },
+    {
+      "section": "exercise2",
+      "label": "Concatenated reference",
+      "name": "LMU_concat_reference_8x5000.fcs",
+      "bytes": 3362170,
+      "sha256": "527073bc1a2c3e188e7d3137c9306f6eedfdff2bfbd376428bf26df8ec2fa7ec"
+    },
+    {
+      "section": "exercise2",
+      "label": "Concatenated without measurement-day alignment",
+      "name": "LMU_concat_no_batch_8x5000.fcs",
+      "bytes": 3362168,
+      "sha256": "47b914f8c7d1698001ed1b4eee206c2cd353bb3e58ff007b64527e959d4daeda"
+    },
+    {
+      "section": "test",
+      "label": "FlowJo test file",
+      "name": "LMU_testfile_S03_protected_day2_raw.fcs",
+      "bytes": 3601905,
+      "sha256": "d097db4832d3ebac9361b195fa1283b62b1bbbfcb27b4bc33e05c53bba711fdf"
+    }
+  ]
+}

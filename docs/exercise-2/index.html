@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Exercise 2: Cluster and name | High-Dimensional Spectral Flow Data Analysis</title>
+  <link rel="icon" href="../assets/cic-logo.png">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&display=swap">
+  <link rel="stylesheet" href="../assets/workshop.css">
+  <script src="../assets/flowjo.js" defer></script>
+</head>
+<body>
+  <a href="#main" class="skip-link">Skip to content</a>
+  <header>
+    <div class="masthead">
+      <div class="wrap masthead-inner">
+        <a class="brand" href=".././" data-workshop-page>High-Dimensional Spectral Flow Data Analysis</a>
+        <img class="cic" src="../assets/cic-logo.png" alt="CIC logo">
+      </div>
+    </div>
+    <div class="navigation">
+      <div class="wrap navigation-inner">
+        <nav aria-label="Workshop"><a href=".././" data-workshop-page>Home</a>
+<a href="../exercise-1/" data-workshop-page>Exercise 1</a>
+<a href="../exercise-2/" data-workshop-page aria-current="page">Exercise 2</a>
+<a href="../downloads/" data-workshop-page>Downloads</a>
+<a href="../glossary/" data-workshop-page>Glossary</a></nav>
+        <div class="version-picker" data-version-picker role="group" aria-labelledby="version-label">
+    <span class="version-label" id="version-label">FlowJo version</span>
+    <div class="version-options">
+      <label><input type="radio" name="flowjo" value="v10" checked><span>v10</span></label>
+      <label><input type="radio" name="flowjo" value="v11"><span>v11</span></label>
+    </div>
+  </div>
+      </div>
+    </div>
+  </header>
+  <main class="wrap" id="main">
+    <div class="intro"><h1>Exercise 2: Cluster and name</h1></div><p><a href="../downloads/#exercise2" data-workshop-page>Get the exercise files</a></p><div class="article" data-version-content><p>Work in pairs, 45 minutes.</p>
+<h2>The study</h2>
+<p>The same eight patients: four <strong>protected</strong>, four <strong>infection-prone</strong>. Hypothesis fixed before the study: <strong>CD8+ MAIT cells are less frequent in infection-prone patients.</strong> This time you let the algorithm find the cell populations.</p>
+<h2>Files</h2>
+<p>Download the <strong>concatenated reference file</strong> (8 samples × 5,000 cells) and, for the last step, the <strong>concatenated file without measurement-day alignment</strong>. Both carry the extra parameters <code>SampleID</code> (1 to 8), <code>GroupID</code> (1 = protected, 2 = infection-prone) and <code>BatchDay</code> (1 or 2).</p>
+<h2>Steps</h2>
+<ol>
+<li>
+<p><strong>Load the reference file</strong> and check the transformation of every marker (T button at the axis).</p>
+</li>
+<li>
+<p><strong>Choose the parameters.</strong> Select only the twelve cell markers. Leave out Time, FSC, SSC, Live-Dead, SampleID, GroupID and BatchDay.</p>
+</li>
+<li>
+<p><strong>Cluster and draw the map.</strong> FlowSOM with <strong>12 metaclusters</strong>; note the seed. UMAP on the same population; note the seed.</p>
+</li>
+<li>
+<p><strong>Name three to five clusters</strong> from their rows in the marker heatmap (Cluster Explorer). Find the MAIT cluster: CD3+ CD8+ CD161 high, TCR Vα7.2+.</p>
+</li>
+<li>
+<p><strong>Answer the study question.</strong> Get the share of the MAIT cluster for each sample.</p>
+<p>Gate each sample on <code>SampleID</code>, place the MAIT cluster under it, and read the frequencies in the Table Editor.</p>
+<p>Then test as in exercise 1: all four of one group above all four of the other gives p = 0.029.</p>
+</li>
+<li>
+<p><strong>Run FlowSOM a second time with a different seed.</strong> Cluster numbers and colours change. Does the MAIT cluster and its group difference stay?</p>
+</li>
+<li>
+<p><strong>Other differences?</strong> Compare the other clusters between the groups. Anything you find here is a hypothesis, not a result: you tested twelve clusters, and with four against four samples no finding survives a correction for multiple testing (FDR).</p>
+</li>
+<li>
+<p><strong>Cross-check.</strong> Repeat steps 2 to 5 with the file without measurement-day alignment and colour the map by <code>BatchDay</code>. What changes, and what does not?</p>
+</li>
+</ol>
+<h2>If you have time</h2>
+<p>Change the number of metaclusters to 8 and to 20. When does the MAIT cluster keep its own cluster?</p>
+</div>
+    <template data-version="v11"><p>Work in pairs, 45 minutes.</p>
+<h2>The study</h2>
+<p>The same eight patients: four <strong>protected</strong>, four <strong>infection-prone</strong>. Hypothesis fixed before the study: <strong>CD8+ MAIT cells are less frequent in infection-prone patients.</strong> This time you let the algorithm find the cell populations.</p>
+<h2>Files</h2>
+<p>Download the <strong>concatenated reference file</strong> (8 samples × 5,000 cells) and, for the last step, the <strong>concatenated file without measurement-day alignment</strong>. Both carry the extra parameters <code>SampleID</code> (1 to 8), <code>GroupID</code> (1 = protected, 2 = infection-prone) and <code>BatchDay</code> (1 or 2).</p>
+<h2>Steps</h2>
+<ol>
+<li>
+<p><strong>Load the reference file</strong> and check the transformation of every marker (T button at the axis).</p>
+</li>
+<li>
+<p><strong>Choose the parameters.</strong> Select only the twelve cell markers. Leave out Time, FSC, SSC, Live-Dead, SampleID, GroupID and BatchDay.</p>
+</li>
+<li>
+<p><strong>Cluster and draw the map.</strong> FlowSOM with <strong>12 metaclusters</strong>; note the seed. UMAP on the same population; note the seed.</p>
+</li>
+<li>
+<p><strong>Name three to five clusters</strong> from their rows in the marker heatmap (Cluster Explorer). Find the MAIT cluster: CD3+ CD8+ CD161 high, TCR Vα7.2+.</p>
+</li>
+<li>
+<p><strong>Answer the study question.</strong> Get the share of the MAIT cluster for each sample.</p>
+<p>Use the per-sample statistics of the MAIT cluster; Charts, main factor <code>GroupID</code>, baseline 1, test <strong>Wilcoxon rank-sum</strong>.</p>
+<p>Then test as in exercise 1: all four of one group above all four of the other gives p = 0.029.</p>
+</li>
+<li>
+<p><strong>Run FlowSOM a second time with a different seed.</strong> Cluster numbers and colours change. Does the MAIT cluster and its group difference stay?</p>
+</li>
+<li>
+<p><strong>Other differences?</strong> Compare the other clusters between the groups. Anything you find here is a hypothesis, not a result: you tested twelve clusters, and with four against four samples no finding survives a correction for multiple testing (FDR).</p>
+</li>
+<li>
+<p><strong>Cross-check.</strong> Repeat steps 2 to 5 with the file without measurement-day alignment and colour the map by <code>BatchDay</code>. What changes, and what does not?</p>
+</li>
+</ol>
+<h2>If you have time</h2>
+<p>Change the number of metaclusters to 8 and to 20. When does the MAIT cluster keep its own cluster?</p>
+</template>
+  </main>
+  <footer class="site-footer">
+    <div class="wrap footer-inner">
+      <span>CytoIntelligence Core (CIC) • Kiel, Germany</span>
+      <img class="cau" src="../assets/cau-logo.png" alt="Kiel University logo">
+    </div>
+  </footer>
+</body>
+</html>
