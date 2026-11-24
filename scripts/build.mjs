@@ -152,6 +152,7 @@ function introduction(heading, description = '', breadcrumb = '') {
 
 function article(versions, fallback = '') {
   if (!versions) return fallback ? `<div class="article">${fallback}</div>` : '';
+  if (versions.v10 === versions.v11) return `<div class="article">${versions.v10}</div>`;
   return `<div class="article" data-version-content>${versions.v10}</div>
     <template data-version="v11">${versions.v11}</template>`;
 }
@@ -221,10 +222,11 @@ function downloads(manifest) {
 }
 
 function glossary(base, versions, pdf) {
-  return introduction('Glossary') + article(versions) +
+  return introduction('Glossary') +
     `<a class="action" href="${base}glossary.pdf" download>Download glossary (PDF)</a>
       <p class="download-file">glossary.pdf · ${formatBytes(pdf.length)}</p>
-      <code class="digest">SHA-256 ${createHash('sha256').update(pdf).digest('hex')}</code>`;
+      <code class="digest">SHA-256 ${createHash('sha256').update(pdf).digest('hex')}</code>` +
+    article(versions);
 }
 
 function exercise(page, base, versions, sharedExercise1) {

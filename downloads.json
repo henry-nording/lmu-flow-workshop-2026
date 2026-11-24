@@ -52,8 +52,8 @@
     },
     {
       "section": "exercise2",
-      "label": "Concatenated without measurement-day alignment",
-      "name": "LMU_concat_no_batch_8x5000.fcs",
+      "label": "Cross-check file",
+      "name": "LMU_concat_exercise2_crosscheck_8x5000.fcs",
       "bytes": 3362168,
       "sha256": "47b914f8c7d1698001ed1b4eee206c2cd353bb3e58ff007b64527e959d4daeda"
     },
