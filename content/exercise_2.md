@@ -48,7 +48,7 @@ Select the reference sample in the Workspace. Choose **Workspace → Plugins →
 :::
 
 ::: v11
-Select **Ungated**. Choose **Platforms → UMAP**, choose the parameter set **Uncompensated** (with **Compensated** the list stays empty), tick the twelve markers, keep **Number of components** at **2** and the other defaults, and click **Submit**. Select **Ungated** again and choose **Platforms → FlowSOM**. Choose **Uncompensated** and untick Live-Dead, `SampleID`, `GroupID` and `BatchDay`; the list should read "APC-A :: CCR7 + 11 more". Set **Number of metaclusters** to **20** (default 10) and **Choose a downsampling method** to **None**, then click **Submit**. With these settings a second run gives the same clusters. The clusters appear as populations under **Ungated**. If FlowJo marks a run as out-of-date, its clusters stay usable; right-click it → **Recalculate** updates it.
+Select **Ungated**. Choose **Platforms → UMAP**, choose the parameter set **Uncompensated** (with **Compensated** the list stays empty), tick the twelve markers, keep **Number of components** at **2** and the other defaults, and click **Submit**. Select **Ungated** again and choose **Platforms → FlowSOM**. Choose **Uncompensated** and untick Live-Dead, `SampleID`, `GroupID` and `BatchDay`; the list should read "APC-A :: CCR7 + 11 more". Set **Number of metaclusters** to **20** (default 10) and **Choose a downsampling method** to **None**, then click **Submit**. With these settings a second run gives the same clusters. The clusters appear as populations under **Ungated**. If FlowJo marks a run as out-of-date, its clusters stay usable. Right-click it → **Recalculate** runs FlowSOM again.
 :::
 
 5. **Name three to five clusters.** Look up which markers identify MAIT cells. Use the marker heatmap to choose the best-matching cluster and explain which marker pattern supports your choice.
@@ -68,7 +68,7 @@ Double-click the MAIT candidate cluster to open its **Graph Window** and plot a 
 :::
 
 ::: v11
-In **Graphs**, select the candidate cluster, choose **Histogram** in the plot settings and put `SampleID` on the x-axis. Draw a range gate around each of the eight peaks. The percentages on the range gates are shares of the cluster, not of the sample. Drag the eight gates into **Tables**; you get one row with eight **Count** columns. FlowJo cannot run the rank test here, because all samples sit in one file: use the counting rule.
+In **Graphs**, select the candidate cluster, choose **Histogram** in the plot settings and put `SampleID` on the x-axis. Draw a range gate around each of the eight peaks. The percentages on the range gates are shares of the cluster, not of the sample. Drag the eight gates into **Tables** and set the statistic to **Count** under **Settings**; you get one row with eight count columns. FlowJo cannot run the rank test here, because all samples sit in one file: use the counting rule.
 :::
 
    Compare the eight sample percentages with the counting rule from Exercise 1 (a two-sided Wilcoxon rank-sum test). With no ties and all four values in one group above all four in the other, the exact p-value is 0.029.
@@ -76,7 +76,7 @@ In **Graphs**, select the candidate cluster, choose **Histogram** in the plot se
 7. **Check how stable your result is.** Run FlowSOM again with the same inputs. Use a different seed if there is a seed setting. Open the new result in Cluster Explorer and find the matching cluster by its marker pattern. Does its group difference persist?
 
 ::: v11
-Run FlowSOM again on **Ungated** with the same inputs, but set **Choose a downsampling method** to **Random** and tick **Use random seed**. In the Cluster Explorer, type `FlowSOM_Ungated_1_cluster` into **Filter clusters** to see only the new run.
+Run FlowSOM again on **Ungated** with the same inputs, but set **Choose a downsampling method** to **Random** and tick **Use random seed**. In the Cluster Explorer, type `FlowSOM_Ungated_1_cluster` into **Filter clusters** to see only the new run. If no cluster in the new run shows the MAIT pattern, note that too: it is part of the answer.
 :::
 
 8. **Other differences?** Compare the other clusters between the groups. Anything you find here is a hypothesis, not a result: you tested twenty clusters. With a rank test and four against four samples, no finding survives a correction for multiple testing (FDR). And a correction removes chance findings, not artefacts.
