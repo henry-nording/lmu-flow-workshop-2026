@@ -163,9 +163,9 @@ function setNavigation(base, manifest, activeSet) {
     `${base}exercise-1/set-${set.toLowerCase()}/`,
     `Set ${set}`,
     activeSet === set,
-    releaseAssetUrl(manifest, `Set_${set}.zip`),
+    `${releaseAssetUrl(manifest, `Set_${set}.zip`)} ${releaseAssetUrl(manifest, 'Reference.zip')}`,
   ));
-  const help = activeSet ? '' : '<p class="set-help">Choose a set to download its ZIP and open its instructions.</p>';
+  const help = activeSet ? '' : '<p class="set-help">Choose a set: this downloads your set and the Reference (two ZIP files) and opens the instructions.</p>';
   return `<nav class="set-nav" aria-labelledby="your-set"><h2 id="your-set">Your set</h2>
     ${help}
     <div class="set-list">${links.join('\n')}</div></nav>`;
@@ -252,10 +252,10 @@ function exercise(page, base, versions, sharedExercise1, manifest) {
       <p class="print-only print-context">Exercise 1: Find the error</p>`;
     return introduction(page.heading, '', breadcrumb) + setNavigation(base, manifest, page.set) +
       `<p class="exercise-actions screen-only">
-        ${downloadLink(manifest, `Set_${page.set}.zip`, `Download Set ${page.set} (ZIP)`)}
-        ${downloadLink(manifest, 'Reference.zip', 'Download Reference (ZIP)')}
+        <a href="${releaseAssetUrl(manifest, `Set_${page.set}.zip`)}" data-download-both="${releaseAssetUrl(manifest, `Set_${page.set}.zip`)} ${releaseAssetUrl(manifest, 'Reference.zip')}">Download Set ${page.set} and Reference (2 ZIP files)</a>
         ${printButton}
-      </p>` + article(versions ?? sharedExercise1, placeholder);
+      </p>
+      <p class="download-file screen-only">If your browser asks, allow it to download multiple files. Single files: ${downloadLink(manifest, `Set_${page.set}.zip`, `Set ${page.set}`)} · ${downloadLink(manifest, 'Reference.zip', 'Reference')}</p>` + article(versions ?? sharedExercise1, placeholder);
   }
   const first = page.route === 'exercise-1/';
   const fileLinks = first

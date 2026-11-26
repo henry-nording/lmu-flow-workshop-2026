@@ -10,7 +10,7 @@ You get the same eight samples twice: **Reference**, cleanly preprocessed, and *
 
 ## Files
 
-On your set page, download **your set** and the **Reference**. Unzip both downloads first: FlowJo does not open ZIP files. File names give set, sample, group and measurement day, for example `REF_S03_protected_day2.fcs` and `A_S03_protected_day2.fcs`. Each file also carries the keywords `GROUP_NAME` and `BATCH_DAY`.
+The button on your set page downloads **your set** and the **Reference** (two ZIP files). Unzip both downloads first: FlowJo does not open ZIP files. File names give set, sample, group and measurement day, for example `REF_S03_protected_day2.fcs` and `A_S03_protected_day2.fcs`. Each file also carries the keywords `GROUP_NAME` and `BATCH_DAY`.
 
 ## Steps
 

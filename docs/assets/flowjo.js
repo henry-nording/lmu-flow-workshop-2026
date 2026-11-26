@@ -57,20 +57,39 @@
     printButton.hidden = false;
     printButton.addEventListener('click', () => window.print());
   }
+  function plainClick(event) {
+    return !(event.defaultPrevented || event.button !== 0 ||
+      event.ctrlKey || event.metaKey || event.shiftKey || event.altKey);
+  }
+
+  // Each file gets its own hidden frame, so the downloads survive opening the instructions
+  // and are not stopped by a pop-up blocker.
+  function downloadAll(urls) {
+    urls.forEach((url, index) => {
+      setTimeout(() => {
+        const frame = document.createElement('iframe');
+        frame.hidden = true;
+        frame.src = url;
+        document.body.append(frame);
+        setTimeout(() => frame.remove(), 60000);
+      }, index * 1000);
+    });
+  }
+
   for (const link of document.querySelectorAll('a[data-set-download]')) {
     link.addEventListener('click', event => {
-      if (event.defaultPrevented || event.button !== 0 ||
-          event.ctrlKey || event.metaKey || event.shiftKey || event.altKey) return;
-
-      // Give the download its own navigation so opening the instructions cannot cancel it.
-      const download = document.createElement('a');
-      download.href = link.dataset.setDownload;
-      download.target = '_blank';
-      download.rel = 'noopener';
-      download.download = '';
-      document.body.append(download);
-      download.click();
-      download.remove();
+      if (!plainClick(event)) return;
+      const urls = link.dataset.setDownload.split(' ').filter(Boolean);
+      event.preventDefault();
+      downloadAll(urls);
+      setTimeout(() => { location.href = link.href; }, urls.length * 1000 + 500);
+    });
+  }
+  for (const link of document.querySelectorAll('a[data-download-both]')) {
+    link.addEventListener('click', event => {
+      if (!plainClick(event)) return;
+      event.preventDefault();
+      downloadAll(link.dataset.downloadBoth.split(' ').filter(Boolean));
     });
   }
   addEventListener('pageshow', () => show(readVersion()));
