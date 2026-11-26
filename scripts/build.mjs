@@ -163,7 +163,7 @@ function setNavigation(base, manifest, activeSet) {
     `${base}exercise-1/set-${set.toLowerCase()}/`,
     `Set ${set}`,
     activeSet === set,
-    `${releaseAssetUrl(manifest, `Set_${set}.zip`)} ${releaseAssetUrl(manifest, 'Reference.zip')}`,
+    activeSet ? undefined : `${releaseAssetUrl(manifest, `Set_${set}.zip`)} ${releaseAssetUrl(manifest, 'Reference.zip')}`,
   ));
   const help = activeSet ? '' : '<p class="set-help">Choose a set: this downloads your set and the Reference (two ZIP files) and opens the instructions.</p>';
   return `<nav class="set-nav" aria-labelledby="your-set"><h2 id="your-set">Your set</h2>
@@ -260,9 +260,10 @@ function exercise(page, base, versions, sharedExercise1, manifest) {
   const first = page.route === 'exercise-1/';
   const fileLinks = first
     ? downloadLink(manifest, 'Reference.zip', 'Download Reference (ZIP)')
-    : manifest.assets.filter(file => file.section === 'exercise2').map(file =>
-      downloadLink(manifest, file.name, `Download ${file.label.toLowerCase()} (FCS)`)
-    ).join('\n');
+    : [downloadLink(manifest, 'Reference.zip', 'Download Reference (ZIP, FlowJo 11)'),
+      ...manifest.assets.filter(file => file.section === 'exercise2').map(file =>
+        downloadLink(manifest, file.name, `Download ${file.label.toLowerCase()} (FCS)`))
+    ].join('\n');
   return introduction(page.heading) + (first ? setNavigation(base, manifest) : '') +
     `<p class="exercise-actions screen-only">${fileLinks}${printButton}</p>` + article(versions, placeholder);
 }

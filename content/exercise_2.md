@@ -8,7 +8,13 @@ The same eight patients: four **protected**, four **infection-prone**. Hypothesi
 
 ## Files
 
+::: v10
 Download **Concatenated reference** (8 samples × 5,000 cells) and **Cross-check file**. Both are single FCS files; there is nothing to unzip. The cross-check file has no measurement-day alignment. Use it in step 9. Both files carry the extra parameters `SampleID` (1 to 8), `GroupID` (1 = protected, 2 = infection-prone) and `BatchDay` (1 or 2). These are parameters, not keywords.
+:::
+
+::: v11
+You work with the eight **Reference** files from Exercise 1, one file per sample. If you no longer have them, download **Reference (ZIP)** and unzip it. FlowJo 11 runs FlowSOM and UMAP on all samples of the selected group together, and each sample keeps its own row in tables. For step 9 also download the **Cross-check file**, a single FCS file without measurement-day alignment; it carries the extra parameters `SampleID` (1 to 8), `GroupID` and `BatchDay` (1 or 2).
+:::
 
 ## Steps
 
@@ -27,7 +33,7 @@ Click **FlowJo → Add Samples** and select the reference FCS. Double-click the 
 :::
 
 ::: v11
-Start a new workbench (**File → New Workbench**, then **File → Save Workbench As**) and drag the reference FCS file into it. You should see 40,000 events.
+Start a new workbench (**File → New Workbench**, then **File → Save Workbench As**) and drag the unzipped **Reference** folder into it. You should see eight samples.
 :::
 
 2. **Set all fluorescence axes to biexponential before you gate or cluster.** Depending on the version, FlowJo shows them as Linear or Log after loading. Linear squeezes dim populations against zero; Log hides negative values.
@@ -37,7 +43,7 @@ In the **Graph Window**, click **T** beside a fluorescence axis and select **Cus
 :::
 
 ::: v11
-Click **T** beside an axis. In the panel on the right, open **Choose the parameters for this transformation** and tick the twelve markers and Live-Dead. The box at the top ticks all parameters, so untick FSC, SSC, **Event #**, **Time**, `SampleID`, `GroupID` and `BatchDay` again. Choose **Biex** and click **Apply**.
+Click **T** beside an axis. In the panel on the right, open **Choose the parameters for this transformation** and tick the twelve markers and Live-Dead. The box at the top ticks all parameters, so untick FSC, SSC, **Event #** and **Time** again. Choose **Biex** and click **Apply**. This sets all eight samples at once.
 :::
 
 3. **Choose the inputs.** Use the same twelve cell markers for FlowSOM and for the map. Leave out Time, FSC, SSC, Live-Dead, `SampleID`, `GroupID`, and `BatchDay`. Use the full reference population for both runs.
@@ -48,7 +54,7 @@ Select the reference sample in the Workspace. Choose **Workspace → Plugins →
 :::
 
 ::: v11
-Select **Ungated**. Choose **Platforms → UMAP**, choose the parameter set **Uncompensated** (with **Compensated** the list stays empty), tick the twelve markers, keep **Number of components** at **2** and the other defaults, and click **Submit**. Select **Ungated** again and choose **Platforms → FlowSOM**. Choose **Uncompensated** and untick Live-Dead, `SampleID`, `GroupID` and `BatchDay`; the list should read "APC-A :: CCR7 + 11 more". Set **Number of metaclusters** to **20** (default 10) and **Choose a downsampling method** to **None**, then click **Submit**. With these settings a second run gives the same clusters. The clusters appear as populations under **Ungated**. If FlowJo marks a run as out-of-date, its clusters stay usable. Right-click it → **Recalculate** runs FlowSOM again.
+With **Experiment Data** selected (all eight samples), select **Ungated**. Choose **Platforms → UMAP**, choose the parameter set **Uncompensated** (with **Compensated** the list stays empty), tick all and untick Live-Dead, keep **Number of components** at **2** and the other defaults, and click **Submit**. It takes about a minute. Select **Ungated** again and choose **Platforms → FlowSOM**. Choose **Uncompensated**, tick all and untick Live-Dead; the list should read "APC-A :: CCR7 + 11 more". Set **Number of metaclusters** to **20** (default 10) and **Choose a downsampling method** to **None** (default Uniform), then click **Submit**. With these settings a second run gives the same clusters. The clusters appear as populations under **Ungated**. If FlowJo marks a run as out-of-date, its clusters stay usable. Right-click it → **Recalculate** runs FlowSOM again.
 :::
 
 5. **Name three to five clusters.** Look up which markers identify MAIT cells. Use the marker heatmap to choose the best-matching cluster and explain which marker pattern supports your choice.
@@ -58,20 +64,22 @@ Select the parent of the FlowSOM clusters and click **Workspace → Cluster Expl
 :::
 
 ::: v11
-Select **Ungated** in **Populations**, then click **Cluster Explorer** in the navigation bar. If the expression panel shows N/A, set **Expression Plots Settings → Choose a parameter set** to **Uncompensated**. Tick the twelve markers under **Choose parameters**, then enlarge the lower panel (icon at its top right) to see the heatmap. Each row is a cluster. To see one cluster alone, select its population in **Populations**. To show the clusters on the map, set **Overlay Graph Settings → Plot Type** to **Dot Plot** and choose the two UMAP parameters as **X Axis** and **Y Axis**. The Cluster Explorer shows all child populations of **Ungated**: after two FlowSOM runs you see all clusters together. Type the run's name into **Filter clusters**, for example `FlowSOM_Ungated_cluster` for the first run and `FlowSOM_Ungated_1_cluster` for the second. The histogram FlowJo shows right after FlowSOM has overlapping labels; read the clusters in the Cluster Explorer.
+Select **Ungated** in **Populations**, then click **Cluster Explorer** in the navigation bar. If the expression panel shows N/A, set **Expression Plots Settings → Choose a parameter set** to **Uncompensated**. Check that the markers are ticked under **Choose parameters**, then enlarge the lower panel (icon at its top right) to see the heatmap. Each row is a cluster. To see one cluster alone, select its population in **Populations**. To show the clusters on the map, set **Overlay Graph Settings → Plot Type** to **Dot Plot** and choose the two UMAP parameters as **X Axis** and **Y Axis**. The Cluster Explorer shows all child populations of **Ungated**: after two FlowSOM runs you see all clusters together. Type the run's name into **Filter clusters**, for example `FlowSOM_Ungated_cluster` for the first run and `FlowSOM_Ungated_1_cluster` for the second. The histogram FlowJo shows right after FlowSOM has overlapping labels; read the clusters in the Cluster Explorer.
 :::
 
-6. **Answer the study question.** Calculate one MAIT-cluster percentage per sample. Each sample contributes exactly 5,000 events, so the share of a sample is its number of events in the candidate cluster divided by 5,000, times 100. Record each sample's `GroupID` alongside its percentage.
+6. **Answer the study question.** Calculate one MAIT-cluster percentage of all events per sample and compare the two groups.
 
 ::: v10
 Double-click the MAIT candidate cluster to open its **Graph Window** and plot a histogram of `SampleID`. Draw eight range gates, one centred on each ID from 1 to 8, including any ID with no peak. In the Workspace, select the eight gates and drag them onto the cluster's parent population to copy them. In **FlowJo → Table Editor**, use **Edit → Add Column → Statistic** to put the **Count** for each cluster gate beside the **Count** for the matching parent gate. For each sample, divide the cluster-gate count by the parent-gate count and multiply by 100.
 :::
 
 ::: v11
-In **Graphs**, select the candidate cluster, choose **Histogram** in the plot settings and put `SampleID` on the x-axis. Draw a range gate around each of the eight peaks. The percentages on the range gates are shares of the cluster, not of the sample. Drag the eight gates into **Tables** and set the statistic to **Count** under **Settings**; you get one row with eight count columns. FlowJo cannot run the rank test here, because all samples sit in one file: use the counting rule.
+Open **Tables** and drag the **Experiment Data** group into the table: eight rows, one per sample. Under **Settings** in the right panel, tick **Frequency of total** and untick **Frequency of parent**. Drag the MAIT cluster into the table. Open **Keywords** in the right panel, search `GROUP_NAME`, tick it and click **Add Keyword**. Then open **Charts**: tick `GROUP_NAME` under **Keyword Category Factors** and the cluster under **Statistic Numeric Factors**. In the comparison settings choose **Wilcoxon rank-sum test**, `GROUP_NAME`, baseline `protected`, and tick **Show the p-value**. FlowJo uses an approximation and shows about 0.030 where the exact value is 0.029.
 :::
 
-   Compare the eight sample percentages with the counting rule from Exercise 1 (a two-sided Wilcoxon rank-sum test). With no ties and all four values in one group above all four in the other, the exact p-value is 0.029.
+::: v10
+Compare the eight sample percentages with the counting rule from Exercise 1 (a two-sided Wilcoxon rank-sum test). With no ties and all four values in one group above all four in the other, the exact p-value is 0.029.
+:::
 
 7. **Check how stable your result is.** Run FlowSOM again with the same inputs. Use a different seed if there is a seed setting. Open the new result in Cluster Explorer and find the matching cluster by its marker pattern. Does its group difference persist?
 
@@ -80,7 +88,7 @@ Run FlowSOM again on **Ungated** with the same inputs, but set **Choose a downsa
 :::
 
 8. **Other differences?** Compare the other clusters between the groups. Anything you find here is a hypothesis, not a result: you tested twenty clusters. With a rank test and four against four samples, no finding survives a correction for multiple testing (FDR). And a correction removes chance findings, not artefacts.
-9. **Cross-check.** Open the **Cross-check file** in a separate workspace (FlowJo 11: workbench) or group and repeat steps 2–6 on that file. Plot a histogram of `BatchDay` and gate values 1 and 2. Compare those two populations on the cross-check map. What changes, and what stays the same?
+9. **Cross-check.** Open the **Cross-check file** in a separate workspace (FlowJo 11: workbench) or group and repeat steps 2–5 on that file. Plot a histogram of `BatchDay` and gate values 1 and 2. Compare those two populations on the cross-check map. What changes, and what stays the same?
 
 ::: v10
 Select the cross-check parent and open **Workspace → Cluster Explorer**. Enable **Show Populations as a new Cluster set**, click **Configure**, and choose the two measurement-day gates. Select the UMAP or tSNE axes for your cross-check map and click **Accept**.
@@ -91,5 +99,7 @@ Name the two day gates `BatchDay 1` and `BatchDay 2`. Select their parent and op
 :::
 
 ## If you have time
+
+Repeat steps 1–6 with your set from Exercise 1, in a new workbench. Which cluster is the MAIT cluster now, how large is it, and does the group difference survive the missing preprocessing step?
 
 Change the number of metaclusters to 12 and to 30. With how many does the MAIT cluster keep its own cluster? Run FlowSOM with **Random** downsampling and **Use random seed** several times: does the MAIT cluster always appear?
