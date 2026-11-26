@@ -54,16 +54,16 @@
       </p><div class="article" data-version-content><p>Work in pairs, 45 to 60 minutes.</p>
 <h2>The study</h2>
 <p>Eight patients, two groups of four: <strong>protected</strong> and <strong>infection-prone</strong>. Our hypothesis, fixed before the study: <strong>CD8+ MAIT cells are less frequent in infection-prone patients.</strong></p>
-<p>You get the same eight samples twice: <strong>Reference</strong>, cleanly preprocessed, and <strong>your set</strong>, in which exactly one preprocessing step was left out. Find the missing step, and find out what it does to the answer of the study.</p>
+<p>You get the same eight samples twice: <strong>Reference</strong>, cleanly preprocessed, and <strong>your set</strong>, in which exactly one preprocessing step was left out. Each pair is given one set, A to E. You do not know which step is missing. Find it, and find out what it does to the answer of the study.</p>
 <h2>Files</h2>
-<p>Download <strong>Reference</strong> and <strong>your set</strong>. File names give set, sample, group and measurement day, for example <code>REF_S03_protected_day2.fcs</code> and <code>A_S03_protected_day2.fcs</code>. Each file also carries the keywords <code>GROUP_NAME</code> and <code>BATCH_DAY</code>.</p>
+<p>On your set page, download <strong>your set</strong> and the <strong>Reference</strong>. Unzip both downloads first: FlowJo does not open ZIP files. File names give set, sample, group and measurement day, for example <code>REF_S03_protected_day2.fcs</code> and <code>A_S03_protected_day2.fcs</code>. Each file also carries the keywords <code>GROUP_NAME</code> and <code>BATCH_DAY</code>.</p>
 <h2>Steps</h2>
 <ol>
 <li>
-<p><strong>Start a new workspace, save it on the local disk, drag in both folders.</strong> You should see sixteen samples.</p>
+<p><strong>Unzip both downloads. Start a new workspace, save it on the local disk, and drag in both unzipped folders.</strong> You should see sixteen samples.</p>
 </li>
 <li>
-<p><strong>Set all fluorescence axes to biexponential before you gate or cluster.</strong> In the test run FlowJo showed them on a log scale, which hides negative values.</p>
+<p><strong>Set all fluorescence axes to biexponential before you gate or cluster.</strong> Depending on the version, FlowJo shows them as Linear or Log after loading. Linear squeezes dim populations against zero; Log hides negative values.</p>
 <p>In the <strong>Graph Window</strong>, click <strong>T</strong> beside a fluorescence axis and select <strong>Customize Axis</strong>. Under <strong>Scale</strong>, choose the biexponential scale, then click <strong>Apply</strong> to update the workspace. Repeat for each fluorescence parameter and check the scale in all samples.</p>
 </li>
 <li>
@@ -74,6 +74,10 @@
 <p><strong>Compare the number of events</strong> of the same sample in both folders. More events than in the reference, or the same number? What could that mean?</p>
 </li>
 <li>
+<p><strong>Gate the main populations, first without clean-up gates, then with them.</strong> Clean-up gates, in this order: quality over time (Time against CD3), debris (FSC-A against SSC-A), single cells (FSC-A against FSC-H), live cells (Live-Dead). Main populations: T cells (CD3+), within them CD4+ and CD8+ T cells; B cells (CD3− CD19+); NK cells (CD3− CD19−, CD56+ or CD16+); within CD4+ and CD8+ T cells, naive (CCR7+ CD45RA+) and memory cells (CD45RA−). Use the same gates in both folders. For one protected and one infection-prone sample, note the share of each population. Which shares differ between the Reference and your set, and does it matter whether you used the clean-up gates?</p>
+<p>Draw the gates on one sample, then drag them onto the group that holds all sixteen samples. FlowJo applies them to every sample in the group.</p>
+</li>
+<li>
 <p><strong>Answer the study question in both folders.</strong> Look up which markers identify MAIT cells. Gate them directly on all events, without clean-up gates, and write down your gating path. Use the same gates in both folders. Note the MAIT share of all events for each sample.</p>
 </li>
 <li>
@@ -83,7 +87,7 @@
 <p><strong>Find the cause.</strong> Open the same sample from both folders side by side and go through the five plots below, with the same axes. Check what you found in a second sample.</p>
 </li>
 <li>
-<p><strong>Name the missing step</strong>, the plot that shows it, and what it did to the answer in steps 5 and 6.</p>
+<p><strong>Name the missing step</strong>, the plot that shows it, and what it did to the answer in steps 6 and 7.</p>
 </li>
 </ol>
 <h2>Five plots, five preprocessing steps</h2>
@@ -97,7 +101,7 @@
 <tbody>
 <tr>
 <td>Time against CD3</td>
-<td><strong>Quality over time.</strong> A gap, then a stretch with lower signal. If you run FlowAI: check what it removed. In the test run it also discarded the normal stretch after the disturbance.</td>
+<td><strong>Quality over time.</strong> A gap, then a stretch with lower signal. If you run automatic quality control (FlowJo 10: FlowAI plugin; FlowJo 11: <strong>Quality Control</strong> in the navigation bar), check what it removed in every sample. It can remove too much (in one test, everything after the disturbance) or too little (in another, only part of it). Compare the event numbers with the Reference.</td>
 </tr>
 <tr>
 <td>FSC-A against SSC-A</td>
@@ -113,7 +117,7 @@
 </tr>
 <tr>
 <td>CCR7 histogram, a day 1 and a day 2 sample overlaid</td>
-<td><strong>Measurement day.</strong> The same population sits at a different position on the two days. Also try CD161.</td>
+<td><strong>Measurement day.</strong> The same population sits at a different position on the two days. Also try CD3 and CD161.</td>
 </tr>
 </tbody>
 </table>
@@ -123,38 +127,45 @@
     <template data-version="v11"><p>Work in pairs, 45 to 60 minutes.</p>
 <h2>The study</h2>
 <p>Eight patients, two groups of four: <strong>protected</strong> and <strong>infection-prone</strong>. Our hypothesis, fixed before the study: <strong>CD8+ MAIT cells are less frequent in infection-prone patients.</strong></p>
-<p>You get the same eight samples twice: <strong>Reference</strong>, cleanly preprocessed, and <strong>your set</strong>, in which exactly one preprocessing step was left out. Find the missing step, and find out what it does to the answer of the study.</p>
+<p>You get the same eight samples twice: <strong>Reference</strong>, cleanly preprocessed, and <strong>your set</strong>, in which exactly one preprocessing step was left out. Each pair is given one set, A to E. You do not know which step is missing. Find it, and find out what it does to the answer of the study.</p>
 <h2>Files</h2>
-<p>Download <strong>Reference</strong> and <strong>your set</strong>. File names give set, sample, group and measurement day, for example <code>REF_S03_protected_day2.fcs</code> and <code>A_S03_protected_day2.fcs</code>. Each file also carries the keywords <code>GROUP_NAME</code> and <code>BATCH_DAY</code>.</p>
+<p>On your set page, download <strong>your set</strong> and the <strong>Reference</strong>. Unzip both downloads first: FlowJo does not open ZIP files. File names give set, sample, group and measurement day, for example <code>REF_S03_protected_day2.fcs</code> and <code>A_S03_protected_day2.fcs</code>. Each file also carries the keywords <code>GROUP_NAME</code> and <code>BATCH_DAY</code>.</p>
 <h2>Steps</h2>
 <ol>
 <li>
-<p><strong>Start a new workspace, save it on the local disk, drag in both folders.</strong> You should see sixteen samples.</p>
-<p>FlowJo 11 calls the workspace a workbench: <strong>File → New Workbench</strong>, then <strong>File → Save Workbench As</strong>.</p>
+<p><strong>Unzip both downloads. Start a new workspace, save it on the local disk, and drag in both unzipped folders.</strong> You should see sixteen samples.</p>
+<p>FlowJo 11 calls the workspace a workbench: <strong>File → New Workbench</strong>, then <strong>File → Save Workbench As</strong>. FlowJo makes one group per folder under <strong>Experiment Data</strong>.</p>
 </li>
 <li>
-<p><strong>Set all fluorescence axes to biexponential before you gate or cluster.</strong> In the test run FlowJo showed them on a log scale, which hides negative values.</p>
-<p>Click <strong>T</strong> beside each fluorescence axis and choose <strong>Biex</strong>.</p>
+<p><strong>Set all fluorescence axes to biexponential before you gate or cluster.</strong> Depending on the version, FlowJo shows them as Linear or Log after loading. Linear squeezes dim populations against zero; Log hides negative values.</p>
+<p>Click <strong>T</strong> beside an axis. In the panel on the right, open <strong>Choose the parameters for this transformation</strong> and tick the twelve markers and Live-Dead. The box at the top ticks all parameters, so untick FSC, SSC, <strong>Event #</strong> and <strong>Time</strong> again. Choose <strong>Biex</strong> and click <strong>Apply</strong>. This sets all samples at once. <strong>Event #</strong> is the running number of each event, added by FlowJo; it is not a measurement.</p>
 </li>
 <li>
 <p><strong>Make one group per patient group.</strong></p>
-<p>Right-click a group → <strong>Create child group from Keyword</strong> → <code>GROUP_NAME</code>.</p>
+<p>Right-click the <strong>Reference</strong> group → <strong>Create Child Groups from Keyword</strong> → <code>GROUP_NAME</code>. Repeat for your set. FlowJo makes the groups <code>GROUP_NAME = protected</code> and <code>GROUP_NAME = infection-prone</code>, four samples each.</p>
 </li>
 <li>
 <p><strong>Compare the number of events</strong> of the same sample in both folders. More events than in the reference, or the same number? What could that mean?</p>
+<p>In <strong>Populations</strong>, click <strong>⌄</strong> beside <strong>%Events</strong> and choose <strong>#Events</strong>. The sample list below then shows a <strong>Count</strong> column for all sixteen samples. Optional: make a table with the count of <strong>Ungated</strong> for all sixteen samples (<strong>Tables</strong>), then a bar chart from it (<strong>Charts</strong>). Set <strong>Chart Statistic</strong> to <strong>Sum</strong>; with the default <strong>Count</strong> every bar shows 1.</p>
+</li>
+<li>
+<p><strong>Gate the main populations, first without clean-up gates, then with them.</strong> Clean-up gates, in this order: quality over time (Time against CD3), debris (FSC-A against SSC-A), single cells (FSC-A against FSC-H), live cells (Live-Dead). Main populations: T cells (CD3+), within them CD4+ and CD8+ T cells; B cells (CD3− CD19+); NK cells (CD3− CD19−, CD56+ or CD16+); within CD4+ and CD8+ T cells, naive (CCR7+ CD45RA+) and memory cells (CD45RA−). Use the same gates in both folders. For one protected and one infection-prone sample, note the share of each population. Which shares differ between the Reference and your set, and does it matter whether you used the clean-up gates?</p>
+<p>Select the <strong>Experiment Data</strong> group before you draw gates; FlowJo then applies each gate to all sixteen samples. If gates seem to be missing, turn on the eye icon (<strong>See-All</strong>) in <strong>Populations</strong>.</p>
 </li>
 <li>
 <p><strong>Answer the study question in both folders.</strong> Look up which markers identify MAIT cells. Gate them directly on all events, without clean-up gates, and write down your gating path. Use the same gates in both folders. Note the MAIT share of all events for each sample.</p>
+<p>Use <strong>Tables</strong>: drag a folder group into the table (one row per sample), then drag in your MAIT gate and <strong>Ungated</strong>, and add <code>GROUP_NAME</code> as a keyword column. Change the statistic under <strong>Settings</strong>, or divide the two counts.</p>
 </li>
 <li>
 <p><strong>Test.</strong> With four against four samples, sort the eight values. If all four of one group lie above all four of the other: p = 0.029. One overlap: p = 0.057, not significant. This is the smallest p a rank test can give with four against four.</p>
-<p>Or in FlowJo: Charts, main factor <code>GROUP_NAME</code>, baseline <code>protected</code>, test <strong>Wilcoxon rank-sum</strong>.</p>
+<p>Or in FlowJo: make the table from one folder only (drag <strong>Reference</strong>, later your set), so that four samples face four. In <strong>Charts</strong>: <strong>Choose statistical test</strong> → <strong>Wilcoxon rank-sum test</strong>, <strong>Specify Main Categorical Factor</strong> → <code>GROUP_NAME</code>, <strong>Select a baseline for comparison</strong> → <code>protected</code>, tick <strong>Show the p-value</strong>. FlowJo uses an approximation and shows about 0.030 where the exact value is 0.029. A table with both folders mixes the same patients twice and gives a p-value that is far too small.</p>
 </li>
 <li>
 <p><strong>Find the cause.</strong> Open the same sample from both folders side by side and go through the five plots below, with the same axes. Check what you found in a second sample.</p>
+<p>To overlay two histograms, open <strong>Reports</strong>. Drag <strong>Ungated</strong> of a day 1 sample into the report and show it as a histogram. Drag a day 2 sample onto the same plot. Set <strong>Normalization</strong> to <strong>Modal</strong>.</p>
 </li>
 <li>
-<p><strong>Name the missing step</strong>, the plot that shows it, and what it did to the answer in steps 5 and 6.</p>
+<p><strong>Name the missing step</strong>, the plot that shows it, and what it did to the answer in steps 6 and 7.</p>
 </li>
 </ol>
 <h2>Five plots, five preprocessing steps</h2>
@@ -168,7 +179,7 @@
 <tbody>
 <tr>
 <td>Time against CD3</td>
-<td><strong>Quality over time.</strong> A gap, then a stretch with lower signal. If you run FlowAI: check what it removed. In the test run it also discarded the normal stretch after the disturbance.</td>
+<td><strong>Quality over time.</strong> A gap, then a stretch with lower signal. If you run automatic quality control (FlowJo 10: FlowAI plugin; FlowJo 11: <strong>Quality Control</strong> in the navigation bar), check what it removed in every sample. It can remove too much (in one test, everything after the disturbance) or too little (in another, only part of it). Compare the event numbers with the Reference.</td>
 </tr>
 <tr>
 <td>FSC-A against SSC-A</td>
@@ -184,7 +195,7 @@
 </tr>
 <tr>
 <td>CCR7 histogram, a day 1 and a day 2 sample overlaid</td>
-<td><strong>Measurement day.</strong> The same population sits at a different position on the two days. Also try CD161.</td>
+<td><strong>Measurement day.</strong> The same population sits at a different position on the two days. Also try CD3 and CD161.</td>
 </tr>
 </tbody>
 </table>

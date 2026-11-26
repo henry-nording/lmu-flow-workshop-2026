@@ -45,7 +45,7 @@
 <h2>The study</h2>
 <p>The same eight patients: four <strong>protected</strong>, four <strong>infection-prone</strong>. Hypothesis fixed before the study: <strong>CD8+ MAIT cells are less frequent in infection-prone patients.</strong> This time you let the algorithm find the cell populations.</p>
 <h2>Files</h2>
-<p>Download <strong>Concatenated reference</strong> (8 samples × 5,000 cells) and <strong>Cross-check file</strong>. The cross-check file has no measurement-day alignment. Use it in step 9. Both files carry the extra parameters <code>SampleID</code> (1 to 8), <code>GroupID</code> (1 = protected, 2 = infection-prone) and <code>BatchDay</code> (1 or 2).</p>
+<p>Download <strong>Concatenated reference</strong> (8 samples × 5,000 cells) and <strong>Cross-check file</strong>. Both are single FCS files; there is nothing to unzip. The cross-check file has no measurement-day alignment. Use it in step 9. Both files carry the extra parameters <code>SampleID</code> (1 to 8), <code>GroupID</code> (1 = protected, 2 = infection-prone) and <code>BatchDay</code> (1 or 2). These are parameters, not keywords.</p>
 <h2>Steps</h2>
 <p>These steps use FlowJo v10.10 with the FlowSOM plugin. On Windows, also have the UMAP plugin available.</p>
 <ol>
@@ -54,30 +54,30 @@
 <p>Click <strong>FlowJo → Add Samples</strong> and select the reference FCS. Double-click the sample to open its <strong>Graph Window</strong>.</p>
 </li>
 <li>
-<p><strong>Set all fluorescence axes to biexponential before you gate or cluster.</strong> In the test run FlowJo showed them on a log scale, which hides negative values.</p>
+<p><strong>Set all fluorescence axes to biexponential before you gate or cluster.</strong> Depending on the version, FlowJo shows them as Linear or Log after loading. Linear squeezes dim populations against zero; Log hides negative values.</p>
 <p>In the <strong>Graph Window</strong>, click <strong>T</strong> beside a fluorescence axis and select <strong>Customize Axis</strong>. Under <strong>Scale</strong>, choose the biexponential scale, then click <strong>Apply</strong> to update the workspace. Repeat for each fluorescence parameter and check the scale in all samples.</p>
 </li>
 <li>
 <p><strong>Choose the inputs.</strong> Use the same twelve cell markers for FlowSOM and for the map. Leave out Time, FSC, SSC, Live-Dead, <code>SampleID</code>, <code>GroupID</code>, and <code>BatchDay</code>. Use the full reference population for both runs.</p>
 </li>
 <li>
-<p><strong>Cluster and draw the map.</strong></p>
-<p>Select the reference sample in the Workspace. Choose <strong>Workspace → Plugins → FlowSOM</strong>, select the marker inputs and request <strong>12 metaclusters</strong>. Run the plugin. Reselect the same parent sample. On <strong>Windows</strong>, choose <strong>Workspace → Plugins → UMAP</strong>. On <strong>Mac</strong>, choose <strong>Workspace → Populations → tSNE</strong>. Use the same marker inputs for a two-dimensional map. Record any seeds shown in the dialogs.</p>
+<p><strong>Draw the map and cluster.</strong> Use <strong>20 metaclusters</strong>.</p>
+<p>Select the reference sample in the Workspace. Choose <strong>Workspace → Plugins → FlowSOM</strong>, select the marker inputs and request <strong>20 metaclusters</strong>. Run the plugin. Reselect the same parent sample. On <strong>Windows</strong>, choose <strong>Workspace → Plugins → UMAP</strong>. On <strong>Mac</strong>, choose <strong>Workspace → Populations → tSNE</strong>. Use the same marker inputs for a two-dimensional map. Record any seeds shown in the dialogs.</p>
 </li>
 <li>
 <p><strong>Name three to five clusters.</strong> Look up which markers identify MAIT cells. Use the marker heatmap to choose the best-matching cluster and explain which marker pattern supports your choice.</p>
 <p>Select the parent of the FlowSOM clusters and click <strong>Workspace → Cluster Explorer</strong>. Select the FlowSOM result, the marker inputs and the UMAP or tSNE axes for your map, then click <strong>Accept</strong>. Read the cluster rows in the heatmap.</p>
 </li>
 <li>
-<p><strong>Answer the study question.</strong> Calculate one MAIT-cluster percentage per sample. Use the number of events that are both in the candidate cluster and in that sample. Divide by the total events in that sample gate and multiply by 100. Record each sample's <code>GroupID</code> alongside its percentage.</p>
+<p><strong>Answer the study question.</strong> Calculate one MAIT-cluster percentage per sample. Each sample contributes exactly 5,000 events, so the share of a sample is its number of events in the candidate cluster divided by 5,000, times 100. Record each sample's <code>GroupID</code> alongside its percentage.</p>
 <p>Double-click the MAIT candidate cluster to open its <strong>Graph Window</strong> and plot a histogram of <code>SampleID</code>. Draw eight range gates, one centred on each ID from 1 to 8, including any ID with no peak. In the Workspace, select the eight gates and drag them onto the cluster's parent population to copy them. In <strong>FlowJo → Table Editor</strong>, use <strong>Edit → Add Column → Statistic</strong> to put the <strong>Count</strong> for each cluster gate beside the <strong>Count</strong> for the matching parent gate. For each sample, divide the cluster-gate count by the parent-gate count and multiply by 100.</p>
-<p>Compare the eight sample percentages with a two-sided Wilcoxon rank-sum test. With no ties and all four values in one group above all four in the other, the exact p-value is 0.029.</p>
+<p>Compare the eight sample percentages with the counting rule from Exercise 1 (a two-sided Wilcoxon rank-sum test). With no ties and all four values in one group above all four in the other, the exact p-value is 0.029.</p>
 </li>
 <li>
 <p><strong>Check how stable your result is.</strong> Run FlowSOM again with the same inputs. Use a different seed if there is a seed setting. Open the new result in Cluster Explorer and find the matching cluster by its marker pattern. Does its group difference persist?</p>
 </li>
 <li>
-<p><strong>Other differences?</strong> Compare the other clusters between the groups. Anything you find here is a hypothesis, not a result: you tested twelve clusters. With a rank test and four against four samples, no finding survives a correction for multiple testing (FDR). And a correction removes chance findings, not artefacts.</p>
+<p><strong>Other differences?</strong> Compare the other clusters between the groups. Anything you find here is a hypothesis, not a result: you tested twenty clusters. With a rank test and four against four samples, no finding survives a correction for multiple testing (FDR). And a correction removes chance findings, not artefacts.</p>
 </li>
 <li>
 <p><strong>Cross-check.</strong> Open the <strong>Cross-check file</strong> in a separate workspace (FlowJo 11: workbench) or group and repeat steps 2–6 on that file. Plot a histogram of <code>BatchDay</code> and gate values 1 and 2. Compare those two populations on the cross-check map. What changes, and what stays the same?</p>
@@ -85,53 +85,54 @@
 </li>
 </ol>
 <h2>If you have time</h2>
-<p>Change the number of metaclusters to 8 and to 20. When does the MAIT cluster keep its own cluster?</p>
+<p>Change the number of metaclusters to 12 and to 30. With how many does the MAIT cluster keep its own cluster? Run FlowSOM with <strong>Random</strong> downsampling and <strong>Use random seed</strong> several times: does the MAIT cluster always appear?</p>
 </div>
     <template data-version="v11"><p>Work in pairs, 45 minutes.</p>
 <h2>The study</h2>
 <p>The same eight patients: four <strong>protected</strong>, four <strong>infection-prone</strong>. Hypothesis fixed before the study: <strong>CD8+ MAIT cells are less frequent in infection-prone patients.</strong> This time you let the algorithm find the cell populations.</p>
 <h2>Files</h2>
-<p>Download <strong>Concatenated reference</strong> (8 samples × 5,000 cells) and <strong>Cross-check file</strong>. The cross-check file has no measurement-day alignment. Use it in step 9. Both files carry the extra parameters <code>SampleID</code> (1 to 8), <code>GroupID</code> (1 = protected, 2 = infection-prone) and <code>BatchDay</code> (1 or 2).</p>
+<p>Download <strong>Concatenated reference</strong> (8 samples × 5,000 cells) and <strong>Cross-check file</strong>. Both are single FCS files; there is nothing to unzip. The cross-check file has no measurement-day alignment. Use it in step 9. Both files carry the extra parameters <code>SampleID</code> (1 to 8), <code>GroupID</code> (1 = protected, 2 = infection-prone) and <code>BatchDay</code> (1 or 2). These are parameters, not keywords.</p>
 <h2>Steps</h2>
-<p>These steps use FlowJo v11.2 or later, with built-in FlowSOM, UMAP and Cluster Explorer.</p>
+<p>These steps use FlowJo v11.2 or later, with built-in FlowSOM, UMAP and Cluster Explorer. In FlowJo 11 the markers are listed under the parameter set <strong>Uncompensated</strong>. This is expected: the files are already unmixed.</p>
 <ol>
 <li>
 <p><strong>Load the reference file.</strong></p>
-<p>Click <strong>Add Samples</strong> and select the reference FCS. Open <strong>Graphs</strong> in the navigation bar, then click the reference in <strong>Samples</strong>.</p>
+<p>Start a new workbench (<strong>File → New Workbench</strong>, then <strong>File → Save Workbench As</strong>) and drag the reference FCS file into it. You should see 40,000 events.</p>
 </li>
 <li>
-<p><strong>Set all fluorescence axes to biexponential before you gate or cluster.</strong> In the test run FlowJo showed them on a log scale, which hides negative values.</p>
-<p>Click <strong>T</strong> beside each fluorescence axis and choose <strong>Biex</strong>.</p>
+<p><strong>Set all fluorescence axes to biexponential before you gate or cluster.</strong> Depending on the version, FlowJo shows them as Linear or Log after loading. Linear squeezes dim populations against zero; Log hides negative values.</p>
+<p>Click <strong>T</strong> beside an axis. In the panel on the right, open <strong>Choose the parameters for this transformation</strong> and tick the twelve markers and Live-Dead. The box at the top ticks all parameters, so untick FSC, SSC, <strong>Event #</strong>, <strong>Time</strong>, <code>SampleID</code>, <code>GroupID</code> and <code>BatchDay</code> again. Choose <strong>Biex</strong> and click <strong>Apply</strong>.</p>
 </li>
 <li>
 <p><strong>Choose the inputs.</strong> Use the same twelve cell markers for FlowSOM and for the map. Leave out Time, FSC, SSC, Live-Dead, <code>SampleID</code>, <code>GroupID</code>, and <code>BatchDay</code>. Use the full reference population for both runs.</p>
 </li>
 <li>
-<p><strong>Cluster and draw the map.</strong></p>
-<p>Select the reference population and choose <strong>Platforms → FlowSOM</strong>. In the panel, select the marker inputs, set the number of metaclusters to <strong>12</strong>, and click <strong>Submit</strong>. Reselect the same parent, choose <strong>Platforms → UMAP</strong>, select the same markers and <strong>2</strong> components, then click <strong>Submit</strong>. Record the settings used for both runs.</p>
+<p><strong>Draw the map and cluster.</strong> Use <strong>20 metaclusters</strong>.</p>
+<p>Select <strong>Ungated</strong>. Choose <strong>Platforms → UMAP</strong>, choose the parameter set <strong>Uncompensated</strong> (with <strong>Compensated</strong> the list stays empty), tick the twelve markers, keep <strong>Number of components</strong> at <strong>2</strong> and the other defaults, and click <strong>Submit</strong>. Select <strong>Ungated</strong> again and choose <strong>Platforms → FlowSOM</strong>. Choose <strong>Uncompensated</strong> and untick Live-Dead, <code>SampleID</code>, <code>GroupID</code> and <code>BatchDay</code>; the list should read &quot;APC-A :: CCR7 + 11 more&quot;. Set <strong>Number of metaclusters</strong> to <strong>20</strong> (default 10) and <strong>Choose a downsampling method</strong> to <strong>None</strong>, then click <strong>Submit</strong>. With these settings a second run gives the same clusters. The clusters appear as populations under <strong>Ungated</strong>. If FlowJo marks a run as out-of-date, its clusters stay usable; right-click it → <strong>Recalculate</strong> updates it.</p>
 </li>
 <li>
 <p><strong>Name three to five clusters.</strong> Look up which markers identify MAIT cells. Use the marker heatmap to choose the best-matching cluster and explain which marker pattern supports your choice.</p>
-<p>Select the parent of the FlowSOM clusters in <strong>Populations</strong>, then click <strong>Cluster Explorer</strong> in the navigation bar. If multiple runs are present, use <strong>Filter Clusters</strong> to show the run you want. Read the cluster rows in the heatmap.</p>
+<p>Select <strong>Ungated</strong> in <strong>Populations</strong>, then click <strong>Cluster Explorer</strong> in the navigation bar. If the expression panel shows N/A, set <strong>Expression Plots Settings → Choose a parameter set</strong> to <strong>Uncompensated</strong>. Tick the twelve markers under <strong>Choose parameters</strong>, then enlarge the lower panel (icon at its top right) to see the heatmap. Each row is a cluster. To see one cluster alone, select its population in <strong>Populations</strong>. To show the clusters on the map, set <strong>Overlay Graph Settings → Plot Type</strong> to <strong>Dot Plot</strong> and choose the two UMAP parameters as <strong>X Axis</strong> and <strong>Y Axis</strong>. The Cluster Explorer shows all child populations of <strong>Ungated</strong>: after two FlowSOM runs you see all clusters together. Type the run's name into <strong>Filter clusters</strong>, for example <code>FlowSOM_Ungated_cluster</code> for the first run and <code>FlowSOM_Ungated_1_cluster</code> for the second. The histogram FlowJo shows right after FlowSOM has overlapping labels; read the clusters in the Cluster Explorer.</p>
 </li>
 <li>
-<p><strong>Answer the study question.</strong> Calculate one MAIT-cluster percentage per sample. Use the number of events that are both in the candidate cluster and in that sample. Divide by the total events in that sample gate and multiply by 100. Record each sample's <code>GroupID</code> alongside its percentage.</p>
-<p>In <strong>Graphs</strong>, choose <strong>Histogram</strong> in the plot settings and put <code>SampleID</code> on the x-axis. Draw a range gate for each peak. In <strong>Populations</strong>, select a sample gate and the candidate cluster, right-click, then choose <strong>Create Boolean Gate → And</strong>. Repeat for each sample. Click the <strong>Events</strong> column header and select <strong>#Events</strong> to read the counts for both kinds of gate.</p>
-<p>Compare the eight sample percentages with a two-sided Wilcoxon rank-sum test. With no ties and all four values in one group above all four in the other, the exact p-value is 0.029.</p>
+<p><strong>Answer the study question.</strong> Calculate one MAIT-cluster percentage per sample. Each sample contributes exactly 5,000 events, so the share of a sample is its number of events in the candidate cluster divided by 5,000, times 100. Record each sample's <code>GroupID</code> alongside its percentage.</p>
+<p>In <strong>Graphs</strong>, select the candidate cluster, choose <strong>Histogram</strong> in the plot settings and put <code>SampleID</code> on the x-axis. Draw a range gate around each of the eight peaks. The percentages on the range gates are shares of the cluster, not of the sample. Drag the eight gates into <strong>Tables</strong>; you get one row with eight <strong>Count</strong> columns. FlowJo cannot run the rank test here, because all samples sit in one file: use the counting rule.</p>
+<p>Compare the eight sample percentages with the counting rule from Exercise 1 (a two-sided Wilcoxon rank-sum test). With no ties and all four values in one group above all four in the other, the exact p-value is 0.029.</p>
 </li>
 <li>
 <p><strong>Check how stable your result is.</strong> Run FlowSOM again with the same inputs. Use a different seed if there is a seed setting. Open the new result in Cluster Explorer and find the matching cluster by its marker pattern. Does its group difference persist?</p>
+<p>Run FlowSOM again on <strong>Ungated</strong> with the same inputs, but set <strong>Choose a downsampling method</strong> to <strong>Random</strong> and tick <strong>Use random seed</strong>. In the Cluster Explorer, type <code>FlowSOM_Ungated_1_cluster</code> into <strong>Filter clusters</strong> to see only the new run.</p>
 </li>
 <li>
-<p><strong>Other differences?</strong> Compare the other clusters between the groups. Anything you find here is a hypothesis, not a result: you tested twelve clusters. With a rank test and four against four samples, no finding survives a correction for multiple testing (FDR). And a correction removes chance findings, not artefacts.</p>
+<p><strong>Other differences?</strong> Compare the other clusters between the groups. Anything you find here is a hypothesis, not a result: you tested twenty clusters. With a rank test and four against four samples, no finding survives a correction for multiple testing (FDR). And a correction removes chance findings, not artefacts.</p>
 </li>
 <li>
 <p><strong>Cross-check.</strong> Open the <strong>Cross-check file</strong> in a separate workspace (FlowJo 11: workbench) or group and repeat steps 2–6 on that file. Plot a histogram of <code>BatchDay</code> and gate values 1 and 2. Compare those two populations on the cross-check map. What changes, and what stays the same?</p>
-<p>Name the two day gates <code>BatchDay 1</code> and <code>BatchDay 2</code>. Select their parent and open <strong>Cluster Explorer</strong>. Type <code>BatchDay</code> in <strong>Filter Clusters</strong> and choose the cross-check UMAP axes in <strong>Overlay</strong>.</p>
+<p>Name the two day gates <code>BatchDay 1</code> and <code>BatchDay 2</code>. Select their parent and open <strong>Cluster Explorer</strong>. Type <code>BatchDay</code> in <strong>Filter clusters</strong> and choose the cross-check UMAP axes in <strong>Overlay Graph Settings</strong>.</p>
 </li>
 </ol>
 <h2>If you have time</h2>
-<p>Change the number of metaclusters to 8 and to 20. When does the MAIT cluster keep its own cluster?</p>
+<p>Change the number of metaclusters to 12 and to 30. With how many does the MAIT cluster keep its own cluster? Run FlowSOM with <strong>Random</strong> downsampling and <strong>Use random seed</strong> several times: does the MAIT cluster always appear?</p>
 </template>
   </main>
   <footer class="site-footer">
