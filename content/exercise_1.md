@@ -15,6 +15,10 @@ Download **Reference** and **your set**. File names give set, sample, group and 
 ## Steps
 
 1. **Start a new workspace, save it on the local disk, drag in both folders.** You should see sixteen samples.
+
+::: v11
+FlowJo 11 calls the workspace a workbench: **File → New Workbench**, then **File → Save Workbench As**.
+:::
 2. **Set all fluorescence axes to biexponential before you gate or cluster.** In the test run FlowJo showed them on a log scale, which hides negative values.
 
 ::: v10
