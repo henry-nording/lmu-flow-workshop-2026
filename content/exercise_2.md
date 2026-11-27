@@ -47,14 +47,14 @@ Click **T** beside an axis. In the panel on the right, open **Choose the paramet
 :::
 
 3. **Choose the inputs.** Use the same twelve cell markers for FlowSOM and for the map. Leave out Time, FSC, SSC, Live-Dead, `SampleID`, `GroupID`, and `BatchDay`. Use the full reference population for both runs.
-4. **Draw the map and cluster.** Use **20 metaclusters**.
+4. **Draw the map and cluster.** Use **12 metaclusters**.
 
 ::: v10
-Select the reference sample in the Workspace. Choose **Workspace → Plugins → FlowSOM**, select the marker inputs and request **20 metaclusters**. Run the plugin. Reselect the same parent sample. On **Windows**, choose **Workspace → Plugins → UMAP**. On **Mac**, choose **Workspace → Populations → tSNE**. Use the same marker inputs for a two-dimensional map. Record any seeds shown in the dialogs.
+Select the reference sample in the Workspace. Choose **Workspace → Plugins → FlowSOM**, select the marker inputs and request **12 metaclusters**. Run the plugin. Reselect the same parent sample. On **Windows**, choose **Workspace → Plugins → UMAP**. On **Mac**, choose **Workspace → Populations → tSNE**. Use the same marker inputs for a two-dimensional map. Record any seeds shown in the dialogs.
 :::
 
 ::: v11
-With **Experiment Data** selected (all eight samples), select **Ungated**. Choose **Platforms → UMAP**, choose the parameter set **Uncompensated** (with **Compensated** the list stays empty), tick all and untick Live-Dead, keep **Number of components** at **2** and the other defaults, and click **Submit**. It takes about a minute. Select **Ungated** again and choose **Platforms → FlowSOM**. Choose **Uncompensated**, tick all and untick Live-Dead; the list should read "APC-A :: CCR7 + 11 more". Set **Number of metaclusters** to **20** (default 10) and **Choose a downsampling method** to **None** (default Uniform), then click **Submit**. With these settings a second run gives the same clusters. The clusters appear as populations under **Ungated**. If FlowJo marks a run as out-of-date, its clusters stay usable. Right-click it → **Recalculate** runs FlowSOM again.
+With **Experiment Data** selected (all eight samples), select **Ungated**. Choose **Platforms → UMAP**, choose the parameter set **Uncompensated** (with **Compensated** the list stays empty), tick all and untick Live-Dead, keep **Number of components** at **2** and the other defaults, and click **Submit**. It takes about a minute. Select **Ungated** again and choose **Platforms → FlowSOM**. Choose **Uncompensated**, tick all and untick Live-Dead; the list should read "APC-A :: CCR7 + 11 more". Set **Number of metaclusters** to **12** (default 10) and **Choose a downsampling method** to **None** (default Uniform), then click **Submit**. The clusters appear as populations under **Ungated**. If FlowJo marks a run as out-of-date, its clusters stay usable. Right-click it → **Recalculate** runs FlowSOM again.
 :::
 
 5. **Name three to five clusters.** Look up which markers identify MAIT cells. Use the marker heatmap to choose the best-matching cluster and explain which marker pattern supports your choice.
@@ -87,7 +87,7 @@ Compare the eight sample percentages with the counting rule from Exercise 1 (a t
 Run FlowSOM again on **Ungated** with the same inputs, but set **Choose a downsampling method** to **Random** and tick **Use random seed**. In the Cluster Explorer, type `FlowSOM_Ungated_1_cluster` into **Filter clusters** to see only the new run. If no cluster in the new run shows the MAIT pattern, note that too: it is part of the answer.
 :::
 
-8. **Other differences?** Compare the other clusters between the groups. Anything you find here is a hypothesis, not a result: you tested twenty clusters. With a rank test and four against four samples, no finding survives a correction for multiple testing (FDR). And a correction removes chance findings, not artefacts.
+8. **Other differences?** Compare the other clusters between the groups. Anything you find here is a hypothesis, not a result: you tested twelve clusters. With a rank test and four against four samples, no finding survives a correction for multiple testing (FDR). And a correction removes chance findings, not artefacts.
 9. **Cross-check.** Open the **Cross-check file** in a separate workspace (FlowJo 11: workbench) or group and repeat steps 2–5 on that file. Plot a histogram of `BatchDay` and gate values 1 and 2. Compare those two populations on the cross-check map. What changes, and what stays the same?
 
 ::: v10
@@ -100,6 +100,6 @@ Name the two day gates `BatchDay 1` and `BatchDay 2`. Select their parent and op
 
 ## If you have time
 
-Repeat steps 1–6 with your set from Exercise 1, in a new workbench. Which cluster is the MAIT cluster now, how large is it, and does the group difference survive the missing preprocessing step?
+Repeat steps 1–6 with your set from Exercise 1, in a new workbench. Which cluster is the MAIT cluster now, how large is it, and does the group difference survive the missing preprocessing step? If no cluster shows the MAIT pattern, run FlowSOM again with 20 metaclusters. Why might your set need more clusters than the Reference?
 
-Change the number of metaclusters to 12 and to 30. With how many does the MAIT cluster keep its own cluster? Run FlowSOM with **Random** downsampling and **Use random seed** several times: does the MAIT cluster always appear?
+Change the number of metaclusters to 8 and to 20. With how many does the MAIT cluster keep its own cluster? Run FlowSOM with **Random** downsampling and **Use random seed** several times: does the MAIT cluster always appear?
