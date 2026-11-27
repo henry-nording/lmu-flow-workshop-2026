@@ -95,7 +95,7 @@ Select the cross-check parent and open **Workspace → Cluster Explorer**. Enabl
 :::
 
 ::: v11
-Name the two day gates `BatchDay 1` and `BatchDay 2`. Select their parent and open **Cluster Explorer**. Type `BatchDay` in **Filter clusters** and choose the cross-check UMAP axes in **Overlay Graph Settings**.
+Start a new workbench and drag in the cross-check file. In the Biex, UMAP and FlowSOM parameter lists, also untick `BatchDay` and `GroupID`; each list should read "+ 11 more" (Biex: "+ 12 more" with Live-Dead). In **Graphs**, select **Ungated**, put `BatchDay` on the x-axis (the plot is a histogram with two narrow peaks) and draw a range gate around each peak. Name them `BatchDay 1` and `BatchDay 2`. Select **Ungated** and open **Cluster Explorer**. Type `BatchDay` in **Filter clusters**; with **Plot Type** **Dot Plot** and the UMAP axes, the map shows both days. The two colours are similar: look for parts of an island that have only one colour.
 :::
 
 ## If you have time

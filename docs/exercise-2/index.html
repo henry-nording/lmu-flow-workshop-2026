@@ -129,7 +129,7 @@
 </li>
 <li>
 <p><strong>Cross-check.</strong> Open the <strong>Cross-check file</strong> in a separate workspace (FlowJo 11: workbench) or group and repeat steps 2–5 on that file. Plot a histogram of <code>BatchDay</code> and gate values 1 and 2. Compare those two populations on the cross-check map. What changes, and what stays the same?</p>
-<p>Name the two day gates <code>BatchDay 1</code> and <code>BatchDay 2</code>. Select their parent and open <strong>Cluster Explorer</strong>. Type <code>BatchDay</code> in <strong>Filter clusters</strong> and choose the cross-check UMAP axes in <strong>Overlay Graph Settings</strong>.</p>
+<p>Start a new workbench and drag in the cross-check file. In the Biex, UMAP and FlowSOM parameter lists, also untick <code>BatchDay</code> and <code>GroupID</code>; each list should read &quot;+ 11 more&quot; (Biex: &quot;+ 12 more&quot; with Live-Dead). In <strong>Graphs</strong>, select <strong>Ungated</strong>, put <code>BatchDay</code> on the x-axis (the plot is a histogram with two narrow peaks) and draw a range gate around each peak. Name them <code>BatchDay 1</code> and <code>BatchDay 2</code>. Select <strong>Ungated</strong> and open <strong>Cluster Explorer</strong>. Type <code>BatchDay</code> in <strong>Filter clusters</strong>; with <strong>Plot Type</strong> <strong>Dot Plot</strong> and the UMAP axes, the map shows both days. The two colours are similar: look for parts of an island that have only one colour.</p>
 </li>
 </ol>
 <h2>If you have time</h2>
