@@ -163,9 +163,8 @@ function setNavigation(base, manifest, activeSet) {
     `${base}exercise-1/set-${set.toLowerCase()}/`,
     `Set ${set}`,
     activeSet === set,
-    activeSet ? undefined : `${releaseAssetUrl(manifest, `Set_${set}.zip`)} ${releaseAssetUrl(manifest, 'Reference.zip')}`,
   ));
-  const help = activeSet ? '' : '<p class="set-help">Choose a set: this downloads your set and the Reference (two ZIP files) and opens the instructions.</p>';
+  const help = activeSet ? '' : '<p class="set-help">Choose your set. Its page has the download for your set and the Reference.</p>';
   return `<nav class="set-nav" aria-labelledby="your-set"><h2 id="your-set">Your set</h2>
     ${help}
     <div class="set-list">${links.join('\n')}</div></nav>`;

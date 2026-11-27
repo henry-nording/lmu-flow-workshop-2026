@@ -54,7 +54,7 @@ Select the reference sample in the Workspace. Choose **Workspace → Plugins →
 :::
 
 ::: v11
-With **Experiment Data** selected (all eight samples), select **Ungated**. Choose **Platforms → UMAP**, choose the parameter set **Uncompensated** (with **Compensated** the list stays empty), tick all and untick Live-Dead, keep **Number of components** at **2** and the other defaults, and click **Submit**. It takes about a minute. Select **Ungated** again and choose **Platforms → FlowSOM**. Choose **Uncompensated**, tick all and untick Live-Dead; the list should read "APC-A :: CCR7 + 11 more". Set **Number of metaclusters** to **12** (default 10) and **Choose a downsampling method** to **None** (default Uniform), then click **Submit**. The clusters appear as populations under **Ungated**. If FlowJo marks a run as out-of-date, its clusters stay usable. Right-click it → **Recalculate** runs FlowSOM again.
+With **Experiment Data** selected (all eight samples), select **Ungated**. Choose **Platforms → UMAP**, choose the parameter set **Uncompensated** (with **Compensated** the list stays empty), tick all and untick Live-Dead, keep **Number of components** at **2** and the other defaults, and click **Submit**. Select **Ungated** again and choose **Platforms → FlowSOM**. Choose **Uncompensated**, tick all and untick Live-Dead; the list should read "APC-A :: CCR7 + 11 more". Set **Number of metaclusters** to **12** (default 10) and **Choose a downsampling method** to **None** (default Uniform), then click **Submit**. The clusters appear under **Ungated**. A run marked out-of-date stays usable.
 :::
 
 5. **Name three to five clusters.** Look up which markers identify MAIT cells. Use the marker heatmap to choose the best-matching cluster and explain which marker pattern supports your choice.
@@ -64,7 +64,7 @@ Select the parent of the FlowSOM clusters and click **Workspace → Cluster Expl
 :::
 
 ::: v11
-Select **Ungated** in **Populations**, then click **Cluster Explorer** in the navigation bar. If the expression panel shows N/A, set **Expression Plots Settings → Choose a parameter set** to **Uncompensated**. Check that the markers are ticked under **Choose parameters**, then enlarge the lower panel (icon at its top right) to see the heatmap. Each row is a cluster. To see one cluster alone, select its population in **Populations**. To show the clusters on the map, set **Overlay Graph Settings → Plot Type** to **Dot Plot** and choose the two UMAP parameters as **X Axis** and **Y Axis**. The Cluster Explorer shows all child populations of **Ungated**: after two FlowSOM runs you see all clusters together. Type the run's name into **Filter clusters**, for example `FlowSOM_Ungated_cluster` for the first run and `FlowSOM_Ungated_1_cluster` for the second. The histogram FlowJo shows right after FlowSOM has overlapping labels; read the clusters in the Cluster Explorer.
+Select **Ungated** in **Populations**, then click **Cluster Explorer** in the navigation bar. If the expression panel shows N/A, set **Expression Plots Settings → Choose a parameter set** to **Uncompensated**. Check that the markers are ticked under **Choose parameters**, then enlarge the lower panel (icon at its top right) to see the heatmap. Each row is a cluster. To see one cluster alone, select its population in **Populations**. To show the clusters on the map, set **Overlay Graph Settings → Plot Type** to **Dot Plot** and choose the two UMAP parameters as **X Axis** and **Y Axis**. The Cluster Explorer shows all child populations of **Ungated**: after two FlowSOM runs you see all clusters together. Type the run's name into **Filter clusters**, for example `FlowSOM_Ungated_cluster` for the first run and `FlowSOM_Ungated_1_cluster` for the second.
 :::
 
 6. **Answer the study question.** Calculate one MAIT-cluster percentage of all events per sample and compare the two groups.
@@ -87,7 +87,7 @@ Compare the eight sample percentages with the counting rule from Exercise 1 (a t
 Run FlowSOM again on **Ungated** with the same inputs, but set **Choose a downsampling method** to **Random** and tick **Use random seed**. In the Cluster Explorer, type `FlowSOM_Ungated_1_cluster` into **Filter clusters** to see only the new run. If no cluster in the new run shows the MAIT pattern, note that too: it is part of the answer.
 :::
 
-8. **Other differences?** Compare the other clusters between the groups. Anything you find here is a hypothesis, not a result: you tested twelve clusters. With a rank test and four against four samples, no finding survives a correction for multiple testing (FDR). And a correction removes chance findings, not artefacts.
+8. **Other differences?** Compare the other clusters between the groups. Anything you find here is a hypothesis, not a result: you tested twelve clusters. With four against four samples the smallest possible p-value is 0.029; after a correction for multiple testing (FDR, Benjamini-Hochberg) over twelve clusters, a single such finding becomes 0.34. Findings survive only if many clusters reach that minimum together. And a correction removes chance findings, not artefacts.
 9. **Cross-check.** Open the **Cross-check file** in a separate workspace (FlowJo 11: workbench) or group and repeat steps 2–5 on that file. Plot a histogram of `BatchDay` and gate values 1 and 2. Compare those two populations on the cross-check map. What changes, and what stays the same?
 
 ::: v10
@@ -95,11 +95,15 @@ Select the cross-check parent and open **Workspace → Cluster Explorer**. Enabl
 :::
 
 ::: v11
-Start a new workbench and drag in the cross-check file. In the Biex, UMAP and FlowSOM parameter lists, also untick `BatchDay` and `GroupID`; each list should read "+ 11 more" (Biex: "+ 12 more" with Live-Dead). In **Graphs**, select **Ungated**, put `BatchDay` on the x-axis (the plot is a histogram with two narrow peaks) and draw a range gate around each peak. Name them `BatchDay 1` and `BatchDay 2`. Select **Ungated** and open **Cluster Explorer**. Type `BatchDay` in **Filter clusters**; with **Plot Type** **Dot Plot** and the UMAP axes, the map shows both days. The two colours are similar: look for parts of an island that have only one colour.
+Start a new workbench and drag in the cross-check file. In all parameter lists, also untick `BatchDay` and `GroupID`. In **Graphs**, select **Ungated**, put `BatchDay` on the x-axis and draw a range gate around each of the two peaks. Name them `BatchDay 1` and `BatchDay 2`. Select **Ungated** and open **Cluster Explorer**. Type `BatchDay` in **Filter clusters**; with **Plot Type** **Dot Plot** and the UMAP axes, the map shows both days. The two colours are similar: look for parts of an island that have only one colour.
 :::
 
 ## If you have time
 
-Repeat steps 1–6 with your set from Exercise 1, in a new workbench. Which cluster is the MAIT cluster now, how large is it, and does the group difference survive the missing preprocessing step? If no cluster shows the MAIT pattern, run FlowSOM again with 20 metaclusters. Why might your set need more clusters than the Reference?
+::: v11
+Repeat steps 1–6 with your set from Exercise 1 in a new workbench. Does the group difference survive the missing step? If no cluster shows the MAIT pattern, try 20 metaclusters. Why might your set need more?
+:::
 
-Change the number of metaclusters to 8 and to 20. With how many does the MAIT cluster keep its own cluster? Run FlowSOM with **Random** downsampling and **Use random seed** several times: does the MAIT cluster always appear?
+::: v10
+Change the number of metaclusters to 8 and to 20. With how many does the MAIT cluster keep its own cluster?
+:::
